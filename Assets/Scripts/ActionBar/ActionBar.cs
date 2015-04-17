@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -20,40 +21,27 @@ public class ActionBar: MonoBehaviour
 	/// </summary>
 	public int skillSlotsCount;
 
-	/// <summary>
-	/// Mock database of skills.
-	/// </summary>
-	private AvailableSkills database;
+    public void OnSkillAdded(object source, SkillEventArgs e)
+    {
+        OrganizeInEmptySlot(e.SkillHero);
+    }
 
 	public void Start()
 	{ 
-		database = new AvailableSkills();
 		AddEmptySlots();
-		SetSkills();
 		SkillSlotController.SlotUpdated += DeselectSlot;
-	}
-
-	/// <summary>
-	/// Set skills to slots.
-	/// </summary>
-	public void SetSkills()
-	{
-		foreach(Skill skill in database.Skills)
-		{
-			OrganizeInEmptySlot(skill);
-		}
 	}
 
 	/// <summary>
 	/// Find an empty slot on the action bar and assign s skill to it.
 	/// </summary>
-	private void OrganizeInEmptySlot(Skill skill)
+    private void OrganizeInEmptySlot(SkillHero skill)
 	{
-		foreach(GameObject slot in SkillSlots)
+        foreach(GameObject slot in SkillSlots)
 		{
 			SkillSlotController controller = slot.GetComponent<SkillSlotController>();
 
-			if(!controller.HasSkill())
+            if(!controller.HasSkill())
 			{
 				controller.SetSkill(skill);
 				break;

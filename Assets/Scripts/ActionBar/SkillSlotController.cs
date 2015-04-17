@@ -33,7 +33,7 @@ public class SkillSlotController: MonoBehaviour, IPointerEnterHandler, IPointerD
 	private SlotCooldown cooldown;
 	private SlotEnergyConsumption energyConsuption;
 
-	private Skill skill;
+    private SkillHero skill;
 
 	#region Unity Memthods
 
@@ -131,12 +131,12 @@ public class SkillSlotController: MonoBehaviour, IPointerEnterHandler, IPointerD
 	/// <summary>
 	/// Set skills properties to slot.
 	/// </summary>
-	public void SetSkill(Skill skill)
+    public void SetSkill(SkillHero skill)
 	{
 		this.skill = skill;
 
 		slotImage.ShowImage();
-		slotImage.SetImage (skill.icon);
+		slotImage.SetImage (skill.Icon);
 
 		hotKey.ChangeHotKeyText(skill.keyCode.ToString());
 		hotKey.ShowHotKey();
