@@ -17,7 +17,7 @@ public class SkillsManager : MonoBehaviour
     public void Start()
     {
         skillsController = new SkillsController();
-        actionBar = GameObject.FindGameObjectWithTag("ActionBar").GetComponent<ActionBar>();
+        actionBar = GameObject.FindGameObjectWithTag(Global.Tags.actionBar).GetComponent<ActionBar>();
         skillsController.SkillAdded += actionBar.OnSkillAdded;
 
         LoadStubSkills();
