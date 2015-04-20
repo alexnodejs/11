@@ -19,4 +19,9 @@ public class GuardBehavior : IEnemyBehavior
 	{
 		return true;
 	}
+
+    public bool CanMeleeAttackBeSuccess(float distance)
+    {
+        return distance < 1.2f ? true : false;
+    }
 }

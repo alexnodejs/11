@@ -117,8 +117,8 @@ public class Weapon : MonoBehaviour
 				if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
 				{
 					Hero hero = shootHit.collider.GetComponent <Hero> ();
-					hero.TakeDemage();
 					gunLine.SetPosition (1, shootHit.point);
+                    hero.TakeDemage(35f);
 				}
 				else
 				{

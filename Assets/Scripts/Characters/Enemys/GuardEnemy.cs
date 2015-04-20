@@ -12,6 +12,12 @@ public class GuardEnemy : Enemy
 
 	public override void RuntimeAnimation()
 	{
-		anim.SetFloat ("Speed", speed * 0.3f);
+		anim.SetFloat("Speed", speed * 0.3f);
 	}
+
+    protected override void MeleeAttack()
+    {
+        base.MeleeAttack();
+        anim.SetBool("MeleeAttack", true);
+    }
 }

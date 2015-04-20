@@ -45,6 +45,11 @@ public class Hero : Character
 		anim.SetFloat ("Speed", characterSpeed);
 		
 		MoveCharacter (destinationDistance);
+
+        if (healthLevel < 0)
+        {
+            anim.SetBool("Die", true);
+        }
 	}
 
 	void MoveCharacter(float destinationDistance)
@@ -72,11 +77,6 @@ public class Hero : Character
             Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
             myTransform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 20f * Time.smoothDeltaTime);
         }
-	}
-
-	public void TakeDemage()
-	{
-		transform.GetComponent<Rigidbody>().AddForce(Vector3.back * 100, ForceMode.Impulse);
 	}
 
 	public void SelectHero()

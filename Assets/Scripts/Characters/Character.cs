@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
 	protected GameObject curWeapon;
 	protected Weapon GUN;
     protected WeaponFactory weaponFact;
+    protected float healthLevel;
 
 	protected virtual void Init()
 	{
@@ -29,7 +30,14 @@ public class Character : MonoBehaviour
         {
             EquipWeapon(curWeaponType);
         }
+
+        healthLevel = 100f;
 	}
+
+    public void TakeDemage(float demage)
+    {
+        healthLevel -= demage;
+    }
 
 	public void AttackCharacter(GameObject hero)
 	{
@@ -48,6 +56,11 @@ public class Character : MonoBehaviour
 		
 		GUN.Shoot();
 	}
+
+    protected virtual void MeleeAttack()
+    {
+
+    }
 
 	public void EquipWeapon(Weapon.WeaponType wType)
 	{

@@ -11,4 +11,10 @@ public static class HelperTrans
 		float angle = Vector3.Angle(direction, transformB.forward);
 		return angle;
 	}
+
+    public static float distanceBetwineTwoTransforms(Transform transformA, Transform transformB)
+    {
+        float distance = Vector3.Distance(transformA.position, transformB.position);
+        return distance;
+    }
 }

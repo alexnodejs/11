@@ -86,6 +86,11 @@ public class Enemy : Character
 		{
             ShootFromCurGun();
 		}
+
+        if (enemyBehavior.CanMeleeAttackBeSuccess(HelperTrans.distanceBetwineTwoTransforms(hero.transform, transform)))
+        {
+            MeleeAttack();
+        }
 	}
 
 	// Virtual Methods:

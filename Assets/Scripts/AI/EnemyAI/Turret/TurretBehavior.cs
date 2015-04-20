@@ -20,4 +20,9 @@ public class TurretBehavior : IEnemyBehavior
 		float angle = HelperTrans.angleBetwineTwoTransforms(transformA, transformB);
 		return (angle < maxAngle * 0.5f) ? true : false;
 	}
+
+    public bool CanMeleeAttackBeSuccess(float distance)
+    {
+        return false;
+    }
 }

@@ -31,4 +31,9 @@ public class EnemyBehavior
 	{
 		return _enemyBehavior.CanShotBeSuccess(transformA, transformB, maxAngle);
 	}
+
+    public bool CanMeleeAttackBeSuccess(float distance)
+    {
+        return _enemyBehavior.CanMeleeAttackBeSuccess(distance); 
+    }
 }
