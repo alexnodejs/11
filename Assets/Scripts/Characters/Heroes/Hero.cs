@@ -48,7 +48,8 @@ public class Hero : Character
 
         if (healthLevel < 0)
         {
-            anim.SetBool("Die", true);
+            isDead = true;
+            anim.SetBool("Die", isDead);
         }
 	}
 

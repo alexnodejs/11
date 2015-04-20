@@ -20,4 +20,12 @@ public class GuardEnemy : Enemy
         base.MeleeAttack();
         anim.SetBool("MeleeAttack", true);
     }
+
+    public void MeleeAttackEnd()
+    {
+        if (curTargetedHero)
+        {
+            curTargetedHero.TakeDemage(26f);
+        }
+    }
 }

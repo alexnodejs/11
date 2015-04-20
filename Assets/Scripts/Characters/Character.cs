@@ -8,6 +8,7 @@ public class Character : MonoBehaviour
 	public GameObject weaponDeploy;	
     public bool autoEquip = false;
     public Weapon.WeaponType curWeaponType;
+    public bool isDead = false;
 
 	protected NavMeshAgent navAgent;
 	protected Animator anim;

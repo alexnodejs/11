@@ -12,6 +12,8 @@ public class Enemy : Character
 
 	protected EnemyBehavior enemyBehavior;
 	protected SphereCollider col;
+    protected Hero curTargetedHero;
+
 	private float maxAngleToTarget = 10f;
 
 	public void Awake()
@@ -44,8 +46,16 @@ public class Enemy : Character
 				{
 					if (hit.collider.gameObject.tag == Tags.heroes)
 					{
-						EC.ISeeHero(this, other.gameObject);
+                        curTargetedHero = other.gameObject.GetComponent<Hero>();
+                        if (!curTargetedHero.isDead)
+                        {
+                            EC.ISeeHero(this, other.gameObject);   
+                        }						                     
 					}
+                    else
+                    {
+                        curTargetedHero = null;
+                    }
 				}
 			}
 		}
