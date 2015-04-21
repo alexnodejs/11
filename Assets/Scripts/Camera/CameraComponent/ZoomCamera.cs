@@ -44,14 +44,30 @@ public class ZoomCamera : CameraDecorator
 	public override void Update()
 	{
 		base.Update();
-		Zoom();
-		AdoptHeight();
+		ZoomSimple();
+		// ZoomRelative();
+		// AdoptHeight();
 	}
 
 	/// <summary>
-	/// Zoom this instance.
+	/// Simples the zoom.
 	/// </summary>
-	private void Zoom()
+	private void ZoomSimple()
+	{
+		if (transform.position.y > zoomMin && InputManager.ZoomAxis() > 0)
+		{
+			transform.Translate(0, -zoomSpeed, zoomSpeed);
+		}
+		if (transform.position.y < zoomMax && InputManager.ZoomAxis() < 0)
+		{
+			transform.Translate(0, zoomSpeed, -zoomSpeed);
+		}
+	}
+
+	/// <summary>
+	/// Zooms the relative.
+	/// </summary>
+	private void ZoomRelative()
 	{
 		if (transform.position.y > GetRelativeZoomMin() && InputManager.ZoomAxis() > 0)
 		{
