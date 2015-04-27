@@ -1,4 +1,4 @@
-# unity3d_tactic_game
+# Space Hunta: Horror tactical game
 Tactical game, created on Unity3D engine
 
 ![alt tag](https://trello-attachments.s3.amazonaws.com/54e22927c3bb0df621ec1436/1357x631/356d0c717aed24f1d5184f896b4c3a8a/SH_lab_level_start.jpg)
