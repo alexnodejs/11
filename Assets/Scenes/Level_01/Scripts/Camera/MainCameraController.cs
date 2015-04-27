@@ -72,7 +72,7 @@ public class MainCameraController : MonoBehaviour
 		CameraComponent camera = new CameraComponent(this.gameObject);
 		ZoomCamera zoomCamera = new ZoomCamera(camera, zoomMin, zoomMax, zoomSpeed);
 		RotateCamera rotateCamera = new RotateCamera(zoomCamera, rotateSpeed);
-		FreeCamera freeCamera = new FreeCamera(rotateCamera, terrain, movementSpeed);
+		FreeCamera freeCamera = new FreeCamera(rotateCamera, minX, minZ, maxX, maxZ, movementSpeed);
 		rtsCamera = new SelectionFrameCamera(freeCamera, selection_frame);
 
 		/// Follow camera init
