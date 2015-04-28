@@ -85,7 +85,8 @@ public class FreeCamera : CameraDecorator
 	private void MoveCamera(float mouseX, float mouseY)
 	{
 		var previousPosition = transform.position;
-		
+
+		if (InputManager.Fire1() || InputManager.Fire3()) return;
 		if (mouseX < ACTIVE_SCREEN_BORDER_WIDTH || InputManager.HorizontalAxis() < 0)
 		{
 			transform.Translate(Vector3.right * -speed * Time.deltaTime);

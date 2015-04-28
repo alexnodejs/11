@@ -41,7 +41,12 @@ public class RotateCamera : CameraDecorator
 		if (InputManager.RotateAxis() != 0)
 		{
 			var rotation = InputManager.RotateAxis() * rotateSpeed * Time.deltaTime;
-			transform.Rotate(0, rotation, 0);
+
+			Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+			RaycastHit hit;
+
+			if (Physics.Raycast(ray, out hit))
+				transform.RotateAround(hit.point, Vector3.up, rotation);
 		}
 	}
 }
