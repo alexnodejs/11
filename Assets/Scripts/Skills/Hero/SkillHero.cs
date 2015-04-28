@@ -1,11 +1,18 @@
 using UnityEngine;
 using System.Collections;
 
-public class SkillHero : SkillBase
+public class SkillHero : MonoBehaviour
 {
-    public SkillHero(string name, string icon)
+    public string name;
+    public string description;
+    public KeyCode keyCode;
+    public float interval;
+    public float energyConsumption;
+    public bool isAvailable;
+    public Sprite Icon;
+
+    void Update()
     {
-        this.name = name;
-        this.Icon = Resources.Load<Sprite>(icon);
+//        Debug.Log("SkillHero");
     }
 }

@@ -5,6 +5,13 @@ using System.Collections.Generic;
 
 public class SkillsController
 {
+    private Character characterController;
+
+    public SkillsController()
+    {
+        characterController = GameObject.FindGameObjectWithTag(Global.Tags.heroes).GetComponent<Character>();
+    }
+
     /// <summary>
     /// Event handler.
     /// SkillAdded delegate.
@@ -19,10 +26,21 @@ public class SkillsController
     /// <summary>
     /// Add a new skill.
     /// </summary>
-    public void AddSkill(SkillHero skill)
+    public void AddSkill(GameObject skillObject)
     {
+        SkillHero skill = skillObject.GetComponent<SkillHero>();
         skillsStorage.Add(skill);
         OnSkillAdded(skill);
+
+        SkillController controller = skill.GetComponent<SkillController>();
+        if (controller != null)
+        {
+            controller.initialize(skill);
+            if (characterController != null)
+            {
+//                controller.SkillActivated += characterController.OnSkillActivated;
+            }
+        }
     }
 
     /// <summary>
