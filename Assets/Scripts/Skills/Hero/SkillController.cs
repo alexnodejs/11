@@ -21,14 +21,30 @@ public class SkillController : MonoBehaviour
 
         if (Input.GetKey(skill.keyCode))
         {
-            if (timeSinceLastExecuted > skill.interval)
-            {
-                timeSinceLastExecuted = 0.0f;
-                OnSkillActivated();
-            }
+            ActivateSkill();
         }
-        
+
+        DeactivateSkill();
+
         timeSinceLastExecuted += Time.deltaTime;
+    }
+
+    protected virtual void ActivateSkill()
+    {
+        if (timeSinceLastExecuted > skill.interval)
+        {
+            timeSinceLastExecuted = 0.0f;
+            skill.isActive = true;
+            OnSkillActivated();
+        }
+    }
+
+    protected virtual void DeactivateSkill()
+    {
+        if (timeSinceLastExecuted > skill.interval)
+        {
+            skill.isActive = false;
+        }
     }
 
     protected virtual void OnSkillActivated()

@@ -10,9 +10,5 @@ public class SkillHero : MonoBehaviour
     public float energyConsumption;
     public bool isAvailable;
     public Sprite Icon;
-
-    void Update()
-    {
-//        Debug.Log("SkillHero");
-    }
+    public bool isActive;
 }
