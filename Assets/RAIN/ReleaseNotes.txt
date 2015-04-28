@@ -1,0 +1,18 @@
+RAIN version 2.1.10.0 Release Notes
+--------------------------------
+
+What's New:
+-----------
+We've added support for our new line of Sentio(tm) Characters.  Sentio Characters are pre-rigged, completely ready to go characters that you can drag and drop into your game for instant functionality.
+
+Sentio Minotaur is now available on the Asset Store: http://u3d.as/bFb
+Sentio Darkness Warlord is now available on the Asset Store: http://u3d.as/biH
+
+Sentio Necromancer is coming soon!
+
+Changes and bug fixes:
+----------------------
+Updated Sentio Character unpack tool to properly overwrite existing assets when unpacking.
+Improved performance of navigation and path following code
+Updated Behavior Tree custom actions to properly use namespaces.  
+The Assembly field in the BT inspector for custom actions and decisions is now Namespace.

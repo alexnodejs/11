@@ -1,0 +1,3 @@
+[submodule "Assets/third-party-assets"]
+	path = Assets/third-party-assets
+	url = git@bitbucket.org:vasilenko_alex/third-party-assets.git
