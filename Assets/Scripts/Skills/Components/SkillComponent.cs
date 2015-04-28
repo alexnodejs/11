@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SkillComponent
+public abstract class SkillComponent
 {
     public string[] Tags;
 
