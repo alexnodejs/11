@@ -1,21 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using RAIN.Entities;
 
 public class SkillSteals: SkillController
 {
-    public Mesh Mesh;
-    private VisualizationComponent visualization;
-    private GameObject heroBody;
-    private Material inactiveSkillBodyShader;
-    private Material activeSkillBodyShader;
+    private GameObject hero;
+    private Renderer heroRenderer;
+    private EntityRig aiEntity;
+    private Material inactiveSkillMaterial;
+    private Material activeSkillMaterial;
 
     void Start()
     {
-        visualization = new VisualizationComponent();
-        heroBody = GameObject.FindGameObjectWithTag(Global.Tags.heroes).transform.FindChild("Body_01").gameObject;
-        inactiveSkillBodyShader = heroBody.GetComponent<Renderer>().material;
+        hero = GameObject.FindGameObjectWithTag(Global.Tags.heroes);
 
-        activeSkillBodyShader = new Material(Shader.Find("Projector/Light"));
+        heroRenderer = hero.transform.FindChild("Body_01").GetComponent<Renderer>();
+        aiEntity = hero.GetComponentInChildren<EntityRig>();
+        inactiveSkillMaterial = heroRenderer.material;
+
+        activeSkillMaterial = new Material(Shader.Find("Projector/Light"));
     }
 
     override public void Update()
@@ -24,11 +27,24 @@ public class SkillSteals: SkillController
 
         if (skill.isActive)
         {
-            heroBody.GetComponent<Renderer>().material = activeSkillBodyShader;
+            MakeHeroInvisibleForEnemies();
         }
         else
         {
-            heroBody.GetComponent<Renderer>().material = inactiveSkillBodyShader;
+            MakeHeroVisibleForEnemies();
         }
     }
+
+    void MakeHeroInvisibleForEnemies()
+    {
+        aiEntity.Entity.IsActive = false;
+        heroRenderer.material = activeSkillMaterial;
+    }
+
+    void MakeHeroVisibleForEnemies()
+    {
+        aiEntity.Entity.IsActive = true;
+        heroRenderer.material = inactiveSkillMaterial;
+    }
+
 }
