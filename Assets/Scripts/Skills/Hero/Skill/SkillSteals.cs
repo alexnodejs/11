@@ -27,13 +27,24 @@ public class SkillSteals: SkillController
 
         if (skill.isActive)
         {
-            aiEntity.Entity.IsActive = false;
-            heroRenderer.material = activeSkillMaterial;
+            MakeHeroInvisibleForEnemies();
         }
         else
         {
-            aiEntity.Entity.IsActive = true;
-            heroRenderer.material = inactiveSkillMaterial;
+            MakeHeroVisibleForEnemies();
         }
     }
+
+    void MakeHeroInvisibleForEnemies()
+    {
+        aiEntity.Entity.IsActive = false;
+        heroRenderer.material = activeSkillMaterial;
+    }
+
+    void MakeHeroVisibleForEnemies()
+    {
+        aiEntity.Entity.IsActive = true;
+        heroRenderer.material = inactiveSkillMaterial;
+    }
+
 }
