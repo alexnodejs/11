@@ -5,21 +5,20 @@ using RAIN.Entities;
 public class SkillSteals: SkillController
 {
     private GameObject hero;
-    private GameObject heroBody;
+    private Renderer heroRenderer;
     private EntityRig aiEntity;
-    private Material inactiveSkillBodyShader;
-    private Material activeSkillBodyShader;
+    private Material inactiveSkillMaterial;
+    private Material activeSkillMaterial;
 
     void Start()
     {
         hero = GameObject.FindGameObjectWithTag(Global.Tags.heroes);
 
-        heroBody = hero.transform.FindChild("Body_01").gameObject;
+        heroRenderer = hero.transform.FindChild("Body_01").GetComponent<Renderer>();
         aiEntity = hero.GetComponentInChildren<EntityRig>();
+        inactiveSkillMaterial = heroRenderer.material;
 
-        inactiveSkillBodyShader = heroBody.GetComponent<Renderer>().material;
-
-        activeSkillBodyShader = new Material(Shader.Find("Projector/Light"));
+        activeSkillMaterial = new Material(Shader.Find("Projector/Light"));
     }
 
     override public void Update()
@@ -29,12 +28,12 @@ public class SkillSteals: SkillController
         if (skill.isActive)
         {
             aiEntity.Entity.IsActive = false;
-            heroBody.GetComponent<Renderer>().material = activeSkillBodyShader;
+            heroRenderer.material = activeSkillMaterial;
         }
         else
         {
             aiEntity.Entity.IsActive = true;
-            heroBody.GetComponent<Renderer>().material = inactiveSkillBodyShader;
+            heroRenderer.material = inactiveSkillMaterial;
         }
     }
 }
