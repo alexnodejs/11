@@ -12,6 +12,7 @@ public class Hero : Character
 
     [HideInInspector]
     public bool readyToShoot;
+    public bool movementLocked;
 
 	private float characterSpeed;
 	private Transform myTransform;              // this transform
@@ -25,6 +26,7 @@ public class Hero : Character
 	{
 		base.Init();
 
+        movementLocked = false;
 		characterSpeed = 0f;
 		myTransform = transform;                                  // sets myTransform to this GameObject.transform
 		destinationPosition = myTransform.position;
@@ -37,14 +39,21 @@ public class Hero : Character
 	}
 
 	void FixedUpdate()
-	{		
-		destinationDistance = Vector3.Distance(destinationPosition, myTransform.position);
-		
-		characterSpeed = navAgent.velocity.magnitude;
-		
-		anim.SetFloat ("Speed", characterSpeed);
-		
-		MoveCharacter (destinationDistance);
+	{	
+        if (movementLocked)
+        {
+            anim.SetFloat ("Speed", 0f);
+        }
+        else
+        {
+            destinationDistance = Vector3.Distance(destinationPosition, myTransform.position);
+            
+            characterSpeed = navAgent.velocity.magnitude;
+            
+            anim.SetFloat ("Speed", characterSpeed);
+            
+            MoveCharacter (destinationDistance);
+        }
 
         if (healthLevel < 0)
         {
@@ -69,6 +78,8 @@ public class Hero : Character
 	
 	public void SetDistinationPosition(Ray ray)
 	{
+        if (movementLocked) return;
+
         RaycastHit hitInfo = new RaycastHit();
         if (Physics.Raycast(ray.origin, ray.direction, out hitInfo))
         {
