@@ -12,6 +12,7 @@ public class Hero : Character
 
     [HideInInspector]
     public bool readyToShoot;
+    [HideInInspector]
     public bool movementLocked;
 
 	private float characterSpeed;
