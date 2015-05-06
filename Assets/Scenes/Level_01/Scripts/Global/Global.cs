@@ -35,7 +35,8 @@ namespace Global
 		public const string ui = "UI";
 		public const string gameManager = "GameManager";
 		public const string heroes = "Heroes";
-	}
+        public const string enemies = "Enemies";
+    }
 
 	#endregion
 }
