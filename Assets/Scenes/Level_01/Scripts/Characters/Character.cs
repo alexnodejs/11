@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 using Global;
 
@@ -19,6 +20,8 @@ public class Character : MonoBehaviour
     protected WeaponFactory weaponFact;
     protected float healthLevel;
 
+    public event EventHandler<CollisionEventArgs> CollisionEntered;
+
 	protected virtual void Init()
 	{
 		navAgent = GetComponent<NavMeshAgent>();
@@ -34,6 +37,14 @@ public class Character : MonoBehaviour
 
         healthLevel = 100f;
 	}
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (CollisionEntered != null)
+        {
+            CollisionEntered(this, new CollisionEventArgs () {Collision = collision});
+        }
+    }
 
     public void TakeDemage(float demage)
     {

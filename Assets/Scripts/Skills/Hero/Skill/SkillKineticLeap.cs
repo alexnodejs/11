@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using Global;
 
-public class SkillKineticLeap: SkillController
+public class SkillKineticLeap: SkillController, IHeroCollision
 {
     /// <summary>
     /// How far ahead an object can be moved
@@ -77,14 +78,19 @@ public class SkillKineticLeap: SkillController
     // Reference to skill particle system
     /// </summary>
     private ParticleSystem particleSystem;
-    
-    void Start()
+
+    #region MonoBehaviour
+
+    void Awake()
     {
         hero = GameObject.FindGameObjectWithTag(Global.Tags.heroes);
         rBody = hero.GetComponent<Rigidbody>();
         collider = hero.GetComponent<CapsuleCollider>();
         heroScript = hero.GetComponent<Hero>();
+    }
 
+    void Start()
+    {
         AttachParticle();
     }
 
@@ -126,6 +132,38 @@ public class SkillKineticLeap: SkillController
             }
         }
     }
+
+    void OnEnable()
+    {
+        heroScript.CollisionEntered += OnHeroCollisionEnter;
+    }
+    
+    void OnDisable()
+    {
+        heroScript.CollisionEntered -= OnHeroCollisionEnter;
+    }
+
+    #endregion
+    
+
+    #region IHeroCollision
+
+    public void OnHeroCollisionEnter(object source, CollisionEventArgs e)
+    {
+        if (!movementInProcess) return;
+
+        if (e.Collision.gameObject.layer == LayerMask.NameToLayer(Layers.enemies))
+        {
+            Character enemy = e.Collision.gameObject.GetComponent<Character>();
+            if (source is IDamageSource)
+            {
+                IDamageSource sourceWithDamage = source as IDamageSource;
+                enemy.TakeDemage(sourceWithDamage.AmountOfDamage());
+            }
+        }
+    }
+
+    #endregion
 
     /// <summary>
     /// Check if there is an object in the target direction

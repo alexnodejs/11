@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 
-public class SkillController : MonoBehaviour
+public abstract class SkillController : MonoBehaviour
 {
     protected SkillHero skill;
     protected float timeSinceLastExecuted = 0.0f;
