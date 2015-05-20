@@ -10,6 +10,8 @@ public class DoorAPI : MonoBehaviour
     public GameObject doorDamage;
     public GameObject doorNormal;
 
+    public bool isHeroAround;
+
     /// <summary>
     /// Private params:
     /// </summary>
@@ -19,19 +21,6 @@ public class DoorAPI : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         doorDamage.SetActive(false);
-    }
-
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(10, 70, 50, 30), "Boom!"))
-        {
-            DoorBoom();
-        }
-
-        if (GUI.Button(new Rect(100, 70, 80, 30), "Open/Close"))
-        {
-            DoorOpenClose();
-        }
     }
 
     public void DoorBoom()
@@ -44,13 +33,34 @@ public class DoorAPI : MonoBehaviour
     }
 
     public void DoorOpenClose()
-    {
-        
+    {        
         anim.SetBool("Open", !anim.GetBool("Open"));
+    }
+
+    public void DoorOpen()
+    {
+        if (!anim.GetBool("Open"))
+            anim.SetBool("Open", true);
     }
 
     private void HideDoorParts()
     {
         doorDamage.SetActive(false);
+    }
+
+    void OnTriggerStay(Collider target)
+    {
+        if (target.tag == Global.Tags.heroes)
+        {
+            isHeroAround = true;
+        }
+    }
+
+    void OnTriggerExit(Collider target)
+    {
+        if (target.tag == Global.Tags.heroes)
+        {
+            isHeroAround = false;
+        }
     }
 }
