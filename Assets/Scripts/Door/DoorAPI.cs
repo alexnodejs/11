@@ -29,7 +29,7 @@ public class DoorAPI : MonoBehaviour
         doorDamage.SetActive(true);
         doorNormal.SetActive(false);
         anim.SetBool("Boom", true);
-        Instantiate(exlosionPrefab, transform.position, new Quaternion(0f, 0f, 0f, 0f));        
+        Instantiate(exlosionPrefab, transform.position, new Quaternion(0f, 90f, 0f, 90f));        
     }
 
     public void DoorOpenClose()
