@@ -40,7 +40,7 @@ public class F3DShotgun : MonoBehaviour
 
                 if (barAPI is IDamageable)
                 {
-                    barAPI.TakeDamage(5f);
+                    barAPI.TakeDamage(2f);
                 }
             }
 

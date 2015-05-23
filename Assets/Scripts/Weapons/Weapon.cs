@@ -5,6 +5,7 @@ using Global;
 
 public class Weapon : MonoBehaviour 
 {
+    public GameObject ShotPrefab;
 	public enum WeaponType {Revolver, Shotgun};
 	public GameObject shotOutPoint;
 	public float shotDamage = 10f;
@@ -24,6 +25,8 @@ public class Weapon : MonoBehaviour
 	AudioSource gunAudio;
 	Light gunLight;
 	float effectsDisplayTime = 0.05f;
+
+    private GameObject _shotGunObj;
 
 	protected WeaponBehavior weaponBehavior;
 	protected int unitAmmoCount = 0;
@@ -123,7 +126,12 @@ public class Weapon : MonoBehaviour
 				else
 				{
 					gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
+
+                    _shotGunObj = (GameObject)Instantiate(ShotPrefab, shotOutPoint.transform.position, shotOutPoint.transform.rotation);
+                    _shotGunObj.transform.SetParent(shotOutPoint.transform);
+                    Invoke("DeleteShotGunObj", 1f);
 				}
+                
 			}
 			else if (reloadTimer >= timerBetweenReload)
 			{
@@ -131,4 +139,9 @@ public class Weapon : MonoBehaviour
 			}
 		}
 	}
+
+    private void DeleteShotGunObj()
+    {
+        Destroy(_shotGunObj);
+    }
 }

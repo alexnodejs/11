@@ -15,9 +15,9 @@ public class BarrelAPI : MonoBehaviour, IDamageable
 
     void FixedUpdate()
     {
-        if (lifeLevel < 100f)
+        if (lifeLevel < 100f && !fireParticles)
         {
-            //AddFire();
+            AddFire();
         }
 
         if (lifeLevel <= 0f)
