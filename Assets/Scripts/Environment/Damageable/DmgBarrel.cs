@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 using Global;
 
@@ -30,8 +31,15 @@ public class DmgBarrel : DamageableObjects
             if (rb == null) continue;
             rb.AddExplosionForce(ExplosionPower, explosionPos, ExplosionRadius, 5.0f);
 
-            // Try to make Damage:
-            DamageHelper.MakeDamage(hit.gameObject, DamageType.Explosion, DamageValues.Explosion);
+            float distance = Vector3.Distance(hit.transform.position, transform.position);
+
+            if (distance < ExplosionRadius)
+            {
+                float curDamage = DamageValues.Explosion - ((DamageValues.Explosion / ExplosionRadius) * distance);
+
+                // Try to make Damage:
+                DamageHelper.MakeDamage(hit.gameObject, DamageType.Explosion, curDamage);
+            }
         }
 
         Invoke("DestroyThis", 0.1f);

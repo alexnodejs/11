@@ -30,7 +30,10 @@ public class DamageableObjects : MonoBehaviour, IDamageable
 
     protected virtual void OnFixedUpdate()
     {
-        
+        if (SatrtLifeLevel > LifeLevel)
+        {
+            Invoke("Demolition", 3f);
+        }
     }
 
     protected virtual void Demolition()
