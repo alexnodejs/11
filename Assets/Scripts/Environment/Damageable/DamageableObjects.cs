@@ -9,6 +9,7 @@ public class DamageableObjects : MonoBehaviour, IDamageable
     /// </summary>
     public float LifeLevel = 100f;
     public ObjMaterials CurObjMaterial = ObjMaterials.Other;
+    public GameObject SplintersPrefabGameObject;
 
     /// <summary>
     /// Private params:
@@ -34,7 +35,9 @@ public class DamageableObjects : MonoBehaviour, IDamageable
 
     protected virtual void Demolition()
     {
-        DestroyThis();
+        Instantiate(SplintersPrefabGameObject, transform.position, new Quaternion(0f, 0f, 0f, 0f));
+
+        Invoke("DestroyThis", 0.1f);
     }
 
     public virtual void TakeDamage(DamageType damageType, float damage)
