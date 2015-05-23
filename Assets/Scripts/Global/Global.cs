@@ -37,5 +37,30 @@ namespace Global
 		public const string heroes = "Heroes";
 	}
 
+    // Objects materials and damage:
+    public static class DamageValues
+    {
+        public const float ShotGun = 2f;
+        public const float Explosion = 200f;
+    }
+
+    public enum ObjMaterials
+    {
+        Other,
+        Metal,
+        Glass,
+        Brick,
+        Stone
+    }
+
+    public enum DamageType
+    {
+        Other,
+        Kinetik,
+        Termal,
+        Electro,
+        Explosion
+    }
+
 	#endregion
 }
