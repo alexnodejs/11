@@ -12,6 +12,19 @@ public class DmgBarrel : DamageableObjects
     public GameObject FirePrefab;
 
     private GameObject _fireParticlesGameObject;
+    private bool _isFirstDamage = false;
+
+    public override void TakeDamage(DamageType damageType, float damage)
+    {
+        base.TakeDamage(damageType, damage);
+
+        if (SatrtLifeLevel > LifeLevel && !_isFirstDamage)
+        {
+            _isFirstDamage = true;
+            InvokeRepeating("PasiveDamage", .01f, 1f);
+            _fireParticlesGameObject = (GameObject)Instantiate(FirePrefab, transform.position, new Quaternion(0f, 0f, 0f, 0f));
+        }
+    }
 
     protected override void Demolition()
     {
@@ -43,5 +56,18 @@ public class DmgBarrel : DamageableObjects
         }
 
         Invoke("DestroyThis", 0.1f);
+        
+    }
+
+    protected override void DestroyThis()
+    {
+        base.DestroyThis();
+        if (_fireParticlesGameObject != null)
+            Destroy(_fireParticlesGameObject);
+    }
+
+    private void PasiveDamage()
+    {
+        TakeDamage(DamageType.Termal, DamageValues.SelfFire);
     }
 }

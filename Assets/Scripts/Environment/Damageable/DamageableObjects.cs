@@ -30,10 +30,7 @@ public class DamageableObjects : MonoBehaviour, IDamageable
 
     protected virtual void OnFixedUpdate()
     {
-        if (SatrtLifeLevel > LifeLevel)
-        {
-            Invoke("Demolition", 3f);
-        }
+
     }
 
     protected virtual void Demolition()
@@ -47,12 +44,14 @@ public class DamageableObjects : MonoBehaviour, IDamageable
     {
         LifeLevel -= DamageHelper.CalculateDamage(damageType, damage, CurObjMaterial);
 
-        if (!(LifeLevel <= 0f) || _isDemolition) return;
-        _isDemolition = true;
-        Demolition();
+        if (LifeLevel <= 0f && !_isDemolition)
+        {
+            _isDemolition = true;
+            Demolition();
+        }
     }
-    
-    protected void DestroyThis()
+
+    protected virtual void DestroyThis()
     {
         Destroy(gameObject);
     }

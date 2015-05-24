@@ -42,6 +42,7 @@ namespace Global
     {
         public const float ShotGun = 2f;
         public const float Explosion = 200f;
+        public const float SelfFire = 20f;
     }
 
     public enum ObjMaterials
