@@ -23,6 +23,7 @@ public class DmgBarrel : DamageableObjects
             _isFirstDamage = true;
             InvokeRepeating("PasiveDamage", .01f, 1f);
             _fireParticlesGameObject = (GameObject)Instantiate(FirePrefab, transform.position, new Quaternion(0f, 0f, 0f, 0f));
+            _fireParticlesGameObject.transform.SetParent(gameObject.transform);
         }
     }
 

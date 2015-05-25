@@ -9,6 +9,7 @@ public class Hero : Character
     public Transform RHTargetTransform;
     public Transform lightTransform;
 	public float speed = 7f;                    // Speed at which the character moves
+    public GameObject DadBodyGameObject;
 
     [HideInInspector]
     public bool readyToShoot;
@@ -53,12 +54,6 @@ public class Hero : Character
             anim.SetFloat ("Speed", characterSpeed);
             
             MoveCharacter (destinationDistance);
-        }
-
-        if (healthLevel < 0)
-        {
-            isDead = true;
-            anim.SetBool("Die", isDead);
         }
 	}
 
@@ -162,6 +157,23 @@ public class Hero : Character
                 anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
                 anim.SetLookAtWeight(0);
             }
+        }
+    }
+
+    private void Dead()
+    {
+        isDead = true;
+        Instantiate(DadBodyGameObject, transform.position, transform.rotation);
+        gameObject.SetActive(false);
+    }
+
+    public override void TakeDamage(DamageType damageType, float damage)
+    {
+        base.TakeDamage(damageType, damage);
+
+        if (LifeLevel < 0 && !isDead)
+        {
+            Dead();
         }
     }
 }

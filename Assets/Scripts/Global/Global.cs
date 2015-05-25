@@ -51,7 +51,8 @@ namespace Global
         Metal,
         Glass,
         Brick,
-        Stone
+        Stone,
+        Meat
     }
 
     public enum DamageType

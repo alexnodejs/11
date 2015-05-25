@@ -7,7 +7,6 @@ public class DoorAPI : MonoBehaviour
     /// Public params:
     /// </summary>
     public GameObject exlosionPrefab;
-    public GameObject doorDamage;
     public GameObject doorNormal;
 
     public bool isHeroAround;
@@ -20,13 +19,11 @@ public class DoorAPI : MonoBehaviour
 	void Awake()
     {
         anim = GetComponent<Animator>();
-        doorDamage.SetActive(false);
     }
 
     public void DoorBoom()
     {
         Invoke("HideDoorParts", 0.7f);
-        doorDamage.SetActive(true);
         doorNormal.SetActive(false);
         anim.SetBool("Boom", true);
         Instantiate(exlosionPrefab, transform.position, new Quaternion(0f, 90f, 0f, 90f));        
@@ -41,11 +38,6 @@ public class DoorAPI : MonoBehaviour
     {
         if (!anim.GetBool("Open"))
             anim.SetBool("Open", true);
-    }
-
-    private void HideDoorParts()
-    {
-        doorDamage.SetActive(false);
     }
 
     void OnTriggerStay(Collider target)

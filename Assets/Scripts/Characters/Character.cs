@@ -3,7 +3,7 @@ using System.Collections;
 
 using Global;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IDamageable
 {
 	public GameObject weaponDeploy;	
     public bool autoEquip = false;
@@ -17,7 +17,7 @@ public class Character : MonoBehaviour
 	protected GameObject curWeapon;
 	protected Weapon GUN;
     protected WeaponFactory weaponFact;
-    protected float healthLevel;
+    public float LifeLevel = 100f;
 
 	protected virtual void Init()
 	{
@@ -31,14 +31,7 @@ public class Character : MonoBehaviour
         {
             EquipWeapon(curWeaponType);
         }
-
-        healthLevel = 100f;
 	}
-
-    public void TakeDemage(float demage)
-    {
-        healthLevel -= demage;
-    }
 
 	public void AttackCharacter(GameObject hero)
 	{
@@ -87,4 +80,9 @@ public class Character : MonoBehaviour
 			GUN = curWeapon.GetComponent<Weapon>();
 		}
 	}
+
+    public virtual void TakeDamage(DamageType damageType, float damage)
+    {
+        LifeLevel -= DamageHelper.CalculateDamage(damageType, damage, ObjMaterials.Meat);
+    }
 }

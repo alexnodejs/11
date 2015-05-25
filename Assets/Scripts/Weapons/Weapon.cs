@@ -121,7 +121,7 @@ public class Weapon : MonoBehaviour
 				{
 					Hero hero = shootHit.collider.GetComponent <Hero> ();
 					gunLine.SetPosition (1, shootHit.point);
-                    hero.TakeDemage(35f);
+                    hero.TakeDamage(DamageType.Kinetik, 35f);
 				}
 				else
 				{
