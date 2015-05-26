@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-using RAIN.Entities;
+// using RAIN.Entities;
 
 public class SkillSteals: SkillController
 {
     private GameObject hero;
     private Renderer heroRenderer;
-    private EntityRig aiEntity;
+    // TODO: RAIN is gone and we need to fix it in future
+	// private EntityRig aiEntity;
     private Material inactiveSkillMaterial;
     private Material activeSkillMaterial;
 
@@ -15,7 +16,7 @@ public class SkillSteals: SkillController
         hero = GameObject.FindGameObjectWithTag(Global.Tags.heroes);
 
         heroRenderer = hero.transform.FindChild("Body_01").GetComponent<Renderer>();
-        aiEntity = hero.GetComponentInChildren<EntityRig>();
+        // aiEntity = hero.GetComponentInChildren<EntityRig>();
         inactiveSkillMaterial = heroRenderer.material;
 
         activeSkillMaterial = new Material(Shader.Find("Projector/Light"));
@@ -37,13 +38,13 @@ public class SkillSteals: SkillController
 
     void MakeHeroInvisibleForEnemies()
     {
-        aiEntity.Entity.IsActive = false;
+        // aiEntity.Entity.IsActive = false;
         heroRenderer.material = activeSkillMaterial;
     }
 
     void MakeHeroVisibleForEnemies()
     {
-        aiEntity.Entity.IsActive = true;
+        // aiEntity.Entity.IsActive = true;
         heroRenderer.material = inactiveSkillMaterial;
     }
 
