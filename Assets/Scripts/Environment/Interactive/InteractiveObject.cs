@@ -5,28 +5,20 @@ using Global;
 public class InteractiveObject : MonoBehaviour, IInteractive
 {
     public GameObject canvasUI;
-    public Animator Anim;
 
     /// <summary>
     /// Private params:
     /// </summary>
     private bool _isHeroAround = false;
 
+    void FixedUpdate()
+    {
+        canvasUI.SetActive(_isHeroAround);
+    }
+
     public void Interact()
     {
         
-    }
-
-    void OnMouseEnter()
-    {
-        if (_isHeroAround)
-            canvasUI.SetActive(true);
-    }
-
-    void OnMouseExit()
-    {
-        if (_isHeroAround)
-            canvasUI.SetActive(false);
     }
 
     void OnTriggerStay(Collider target)
