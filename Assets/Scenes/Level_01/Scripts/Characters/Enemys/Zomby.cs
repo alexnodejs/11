@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using RAIN.Core;
+//using RAIN.Core;
 
 public class Zomby: Character
 {
@@ -22,7 +22,7 @@ public class Zomby: Character
         {
             isDead = true;
             anim.SetBool("Dead", isDead);
-            GetComponentInChildren<AIRig>().enabled = false;
+//            GetComponentInChildren<AIRig>().enabled = false;
         }
     }
 }

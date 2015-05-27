@@ -51,6 +51,7 @@ public class SkillSteals: SkillController
 
     protected override void ValidateSkill()
     {
-        skill.isValid = (aiEntity.Entity.IsActive == true);
-    }
+		// skill.isValid = (aiEntity.Entity.IsActive == true);
+		skill.isValid = true;
+	}
 }
