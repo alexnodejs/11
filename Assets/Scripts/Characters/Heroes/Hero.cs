@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System;
 using Global;
 
-public class Hero : Character
+public class Hero : Character, IDamageSource
 {
 	public string Name = "Scout";
     public Transform RHTargetTransform;
@@ -12,6 +12,7 @@ public class Hero : Character
 
     [HideInInspector]
     public bool readyToShoot;
+    [HideInInspector]
     public bool movementLocked;
 
 	private float characterSpeed;
@@ -21,6 +22,7 @@ public class Hero : Character
     private Vector3 targetPoint;
 	private SpriteRenderer selectCircle;
 	private float kHeroRotationSpeed = 200f;
+    protected float baseDamage = 40.0f;
 
 	protected override void Init()
 	{
@@ -75,6 +77,15 @@ public class Hero : Character
 			navAgent.enabled = false;
 		}
 	}
+
+    #region IDamageSource
+
+    public float AmountOfDamage()
+    {
+        return baseDamage;
+    }
+
+    #endregion
 	
 	public void SetDistinationPosition(Ray ray)
 	{

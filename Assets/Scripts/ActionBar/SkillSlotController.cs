@@ -57,8 +57,8 @@ public class SkillSlotController: MonoBehaviour, IPointerEnterHandler, IPointerD
 	{
 		if (HasSkill())
 		{
-			cooldown.Update();
-			if (Input.GetKey(skill.keyCode))
+            cooldown.Update();
+			if (Input.GetKey(skill.keyCode) && skill.isActive)
 			{
 				UseSkill();
 			}

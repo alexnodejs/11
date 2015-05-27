@@ -11,4 +11,5 @@ public class SkillHero : MonoBehaviour
     public bool isAvailable;
     public Sprite Icon;
     public bool isActive;
+    public bool isValid;
 }
