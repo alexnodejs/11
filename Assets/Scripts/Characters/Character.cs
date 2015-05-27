@@ -4,12 +4,13 @@ using System;
 
 using Global;
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour, IDamageable
 {
 	public GameObject weaponDeploy;	
     public bool autoEquip = false;
     public Weapon.WeaponType curWeaponType;
     public bool isDead = false;
+    public float LifeLevel = 100f;
 
 	protected NavMeshAgent navAgent;
 	protected Animator anim;
@@ -18,7 +19,6 @@ public class Character : MonoBehaviour
 	protected GameObject curWeapon;
 	protected Weapon GUN;
     protected WeaponFactory weaponFact;
-    protected float healthLevel;
 
     public event EventHandler<CollisionEventArgs> CollisionEntered;
 
@@ -34,8 +34,6 @@ public class Character : MonoBehaviour
         {
             EquipWeapon(curWeaponType);
         }
-
-        healthLevel = 100f;
 	}
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -46,9 +44,9 @@ public class Character : MonoBehaviour
         }
     }
 
-    public void TakeDemage(float demage)
+    public void TakeDemage(DamageType damageType, float damage)
     {
-        healthLevel -= demage;
+        LifeLevel -= DamageHelper.CalculateDamage(damageType, damage, ObjMaterials.Meat);
     }
 
 	public void AttackCharacter(GameObject hero)
@@ -98,4 +96,9 @@ public class Character : MonoBehaviour
 			GUN = curWeapon.GetComponent<Weapon>();
 		}
 	}
+
+    public virtual void TakeDamage(DamageType damageType, float damage)
+    {
+        LifeLevel -= DamageHelper.CalculateDamage(damageType, damage, ObjMaterials.Meat);
+    }
 }

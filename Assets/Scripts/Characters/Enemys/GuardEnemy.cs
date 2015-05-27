@@ -25,7 +25,7 @@ public class GuardEnemy : Enemy
     {
         if (curTargetedHero)
         {
-            curTargetedHero.TakeDemage(26f);
+            curTargetedHero.TakeDamage(DamageType.Kinetik, 20f);
         }
     }
 }

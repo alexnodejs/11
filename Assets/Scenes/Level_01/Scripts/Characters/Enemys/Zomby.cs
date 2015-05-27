@@ -8,7 +8,6 @@ public class Zomby: Character
     protected override void Init()
     {
         base.Init();
-        healthLevel = 100f;
     }
 
 	void Start ()
@@ -18,7 +17,7 @@ public class Zomby: Character
 
     void Update()
     {
-        if (healthLevel <= 0 && !isDead)
+        if (LifeLevel <= 0 && !isDead)
         {
             isDead = true;
             anim.SetBool("Dead", isDead);

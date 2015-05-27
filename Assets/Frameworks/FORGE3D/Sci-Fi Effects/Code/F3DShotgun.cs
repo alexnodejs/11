@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Global;
 
 public class F3DShotgun : MonoBehaviour 
 {
@@ -36,12 +37,9 @@ public class F3DShotgun : MonoBehaviour
 
                 rb.AddForceAtPosition(force, pos);
 
-                BarrelAPI barAPI = other.transform.GetComponent<BarrelAPI>();
+                DamageHelper.MakeDamage(other, DamageType.Kinetik, DamageValues.ShotGun);
 
-                if (barAPI is IDamageable)
-                {
-                    barAPI.TakeDamage(5f);
-                }
+                other.SendMessage("Shatter", pos, SendMessageOptions.DontRequireReceiver);
             }
 
             i++;

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Global;
 
 public interface IDamageable
 {
-    void TakeDamage(float force);
+    void TakeDamage(DamageType damageType, float damage);
 }

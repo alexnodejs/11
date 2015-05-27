@@ -3,7 +3,7 @@ using System.Collections;
 
 using Global;
 
-public class Shotgun : Weapon 
+public class Shotgun : Weapon
 {
 	Shotgun()
 	{

@@ -162,7 +162,7 @@ public class SkillKineticLeap: SkillController, IHeroCollision
             if (source is IDamageSource)
             {
                 IDamageSource sourceWithDamage = source as IDamageSource;
-                enemy.TakeDemage(sourceWithDamage.AmountOfDamage());
+                enemy.TakeDemage(DamageType.Kinetik, sourceWithDamage.AmountOfDamage());
             }
         }
     }
