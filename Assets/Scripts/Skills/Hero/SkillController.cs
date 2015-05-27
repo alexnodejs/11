@@ -19,12 +19,22 @@ public abstract class SkillController : MonoBehaviour
     {
         if (skill == null) return;
 
-        if (Input.GetKey(skill.keyCode))
+        if (skill.isActive)
         {
-            ActivateSkill();
+            DeactivateSkill();
         }
-
-        DeactivateSkill();
+        else
+        {
+            if (Input.GetKey(skill.keyCode))
+            {
+                ValidateSkill();
+                
+                if (skill.isValid)
+                {
+                    ActivateSkill();
+                }
+            }
+        }
 
         timeSinceLastExecuted += Time.deltaTime;
     }
@@ -52,6 +62,16 @@ public abstract class SkillController : MonoBehaviour
         if (SkillActivated != null)
         {
             SkillActivated(this, new SkillEventArgs () {SkillHero = skill});
+        }
+    }
+
+    abstract protected void ValidateSkill();
+    
+    protected virtual void LateUpdate()
+    {
+        if (skill.isValid)
+        {
+            skill.isValid = false;
         }
     }
 }

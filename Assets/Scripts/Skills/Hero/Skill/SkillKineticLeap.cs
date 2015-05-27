@@ -98,23 +98,27 @@ public class SkillKineticLeap: SkillController, IHeroCollision
     {
         base.Update();
 
-        if (skill.isActive)
+        if (skill.isValid)
         {
-            if (CanMoveToDestinationPoint())
-            {
-                heroScript.movementLocked = true;
-                skill.isActive = false;
-                movementInProcess = true;
+            heroScript.movementLocked = true;
+            movementInProcess = true;
 
-                SaveInitialTransform();
-                PrepareMovementPoints();
-                ShowPartical();
-            }
+            SaveInitialTransform();
+            PrepareMovementPoints();
+            ShowPartical();
         }
 
-        if (!movementInProcess)
+        if (!skill.isActive)
         {
             heroScript.movementLocked = false;
+        }
+    }
+
+    protected override void ValidateSkill()
+    {
+        if (CanMoveToDestinationPoint())
+        {
+            skill.isValid = true;
         }
     }
 

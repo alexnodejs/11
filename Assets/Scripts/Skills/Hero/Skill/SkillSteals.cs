@@ -25,11 +25,12 @@ public class SkillSteals: SkillController
     {
         base.Update();
 
-        if (skill.isActive)
+        if (skill.isValid)
         {
             MakeHeroInvisibleForEnemies();
         }
-        else
+
+        if (!skill.isActive)
         {
             MakeHeroVisibleForEnemies();
         }
@@ -47,4 +48,8 @@ public class SkillSteals: SkillController
         heroRenderer.material = inactiveSkillMaterial;
     }
 
+    protected override void ValidateSkill()
+    {
+        skill.isValid = (aiEntity.Entity.IsActive == true);
+    }
 }
