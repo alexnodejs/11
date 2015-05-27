@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 using Global;
 
@@ -9,6 +10,7 @@ public class Character : MonoBehaviour, IDamageable
     public bool autoEquip = false;
     public Weapon.WeaponType curWeaponType;
     public bool isDead = false;
+    public float LifeLevel = 100f;
 
 	protected NavMeshAgent navAgent;
 	protected Animator anim;
@@ -17,7 +19,8 @@ public class Character : MonoBehaviour, IDamageable
 	protected GameObject curWeapon;
 	protected Weapon GUN;
     protected WeaponFactory weaponFact;
-    public float LifeLevel = 100f;
+
+    public event EventHandler<CollisionEventArgs> CollisionEntered;
 
 	protected virtual void Init()
 	{
@@ -32,6 +35,19 @@ public class Character : MonoBehaviour, IDamageable
             EquipWeapon(curWeaponType);
         }
 	}
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        if (CollisionEntered != null)
+        {
+            CollisionEntered(this, new CollisionEventArgs () {Collision = collision});
+        }
+    }
+
+    public void TakeDemage(DamageType damageType, float damage)
+    {
+        LifeLevel -= DamageHelper.CalculateDamage(damageType, damage, ObjMaterials.Meat);
+    }
 
 	public void AttackCharacter(GameObject hero)
 	{

@@ -17,11 +17,12 @@ public class SkillHologram : SkillController
     {
         base.Update();
 
-        if (skill.isActive)
+        if (skill.isValid)
         {
             AddHologram();
         }
-        else
+
+        if (!skill.isActive)
         {
             RemoveHologram();
         }
@@ -29,11 +30,8 @@ public class SkillHologram : SkillController
 
     protected void AddHologram()
     {
-        if (hologram != null) return;
-
         hologram = new GameObject("Hero Hologram");
         hologram.transform.position = hero.transform.position;
-        hologram.transform.rotation = hero.transform.rotation;
 
         GameObject sourceObject = Instantiate(source, Vector3.zero, Quaternion.identity) as GameObject;
         sourceObject.transform.SetParent(hologram.transform, false);
@@ -42,5 +40,10 @@ public class SkillHologram : SkillController
     protected void RemoveHologram()
     {
         Destroy(hologram);
+    }
+
+    protected override void ValidateSkill()
+    {
+        skill.isValid = (hologram == null);
     }
 }
