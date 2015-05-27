@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Global;
+using ShatterToolkit;
 
 public class DmgBarrel : DamageableObjects 
 {
@@ -52,6 +53,19 @@ public class DmgBarrel : DamageableObjects
 
                 // Try to make Damage:
                 DamageHelper.MakeDamage(hit.gameObject, DamageType.Explosion, curDamage);
+
+                if (hit.GetComponent<ShatterTool>() is ShatterTool)
+                {
+                    Mesh mesh = hit.gameObject.GetComponent<MeshFilter>().mesh;
+                    Vector3[] vertices = mesh.vertices;
+                    for (var i = 0; i < vertices.Length; i++)
+                    {
+                        var spawnPoint = transform.TransformPoint(vertices[i]);
+                        var q = Random.Range(0, vertices.Length);
+                        spawnPoint = transform.TransformPoint(vertices[q]);
+                        hit.gameObject.SendMessage("Shatter", spawnPoint, SendMessageOptions.DontRequireReceiver);
+                    }
+                }
             }
         }
 
