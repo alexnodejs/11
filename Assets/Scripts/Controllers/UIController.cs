@@ -5,12 +5,12 @@ using Global;
 
 public class UIController : MonoBehaviour {
 
-	public GameObject pointer;
-	private SpriteRenderer pointCircle;
+	public GameObject Pointer;
+	private SpriteRenderer _pointCircle;
 	
 	void Start () 
 	{
-		pointCircle = pointer.GetComponent<SpriteRenderer>();
+		_pointCircle = Pointer.GetComponent<SpriteRenderer>();
 	}
 
 	void Update () 
@@ -24,8 +24,8 @@ public class UIController : MonoBehaviour {
         if (Physics.Raycast(ray.origin, ray.direction, out hitInfo))
 		{
             Vector3 targetPoint = hitInfo.point;
-			pointCircle.enabled = true;
-			pointer.transform.position = targetPoint + new Vector3(0, 0.2f, 0);
+			_pointCircle.enabled = true;
+			Pointer.transform.position = targetPoint + new Vector3(0, 0.2f, 0);
             CancelInvoke("HidePointer");
 			Invoke("HidePointer", 0.5f);
 		}
@@ -33,6 +33,6 @@ public class UIController : MonoBehaviour {
 
 	void HidePointer()
 	{
-		pointCircle.enabled = false;
+		_pointCircle.enabled = false;
 	}
 }

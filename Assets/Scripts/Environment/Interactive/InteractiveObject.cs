@@ -5,6 +5,7 @@ using Global;
 public class InteractiveObject : MonoBehaviour, IInteractive
 {
     public GameObject canvasUI;
+    public string Name;
 
     /// <summary>
     /// Private params:
@@ -34,6 +35,12 @@ public class InteractiveObject : MonoBehaviour, IInteractive
         if (target.tag == Tags.heroes)
         {
             _isHeroAround = false;
+            OnHeroExit();
         }
+    }
+
+    protected virtual void OnHeroExit()
+    {
+        
     }
 }

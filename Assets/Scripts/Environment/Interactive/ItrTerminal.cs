@@ -4,14 +4,17 @@ using Global;
 
 public class ItrTerminal : InteractiveObject
 {
-    public ItrDoor[] DoorsArray;
+    private EnvironmentController EC;
 
-    public void UnlockDoors()
+    void Awake()
     {
-        foreach (var doorItr in DoorsArray)
-        {
-            doorItr.IsBlock = false;
-        }
+        EC = GameObject.FindObjectOfType<EnvironmentController>();
     }
 
+    protected override void OnHeroExit()
+    {
+        base.OnHeroExit();
+
+        EC.HideControlPanel();
+    }
 }

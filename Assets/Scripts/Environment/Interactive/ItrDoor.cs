@@ -4,12 +4,19 @@ using Global;
 
 public class ItrDoor : InteractiveObject
 {
-    public bool IsBlock = true;
+    public enum LockPosition
+    {
+        Auto = 0,
+        UnLock,
+        Lock
+    }
+
+    public LockPosition lockPos;
     public Animator Anim;
 
     public void DoorOpenClose()
     {
-        if (!IsBlock)
+        if (lockPos != LockPosition.Lock)
             Anim.SetBool("Open", !Anim.GetBool("Open"));
     }
 }
