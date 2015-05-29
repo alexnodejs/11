@@ -12,9 +12,11 @@ public class InteractiveObject : MonoBehaviour, IInteractive
     /// </summary>
     private bool _isHeroAround = false;
 
+    protected GameObject CurHeroGameObject;
+
     void FixedUpdate()
     {
-        canvasUI.SetActive(_isHeroAround);
+        OnFixedUpdate();
     }
 
     public void Interact()
@@ -26,6 +28,7 @@ public class InteractiveObject : MonoBehaviour, IInteractive
     {
         if (target.tag == Tags.heroes)
         {
+            CurHeroGameObject = target.gameObject;
             _isHeroAround = true;
         }
     }
@@ -34,13 +37,18 @@ public class InteractiveObject : MonoBehaviour, IInteractive
     {
         if (target.tag == Tags.heroes)
         {
-            _isHeroAround = false;
             OnHeroExit();
         }
     }
 
     protected virtual void OnHeroExit()
     {
-        
+        CurHeroGameObject = null;
+        _isHeroAround = false;
+    }
+
+    protected virtual void OnFixedUpdate()
+    {
+        canvasUI.SetActive(_isHeroAround);
     }
 }

@@ -65,12 +65,15 @@ public class EnvironmentController : MonoBehaviour
 
         DoorCtrPanel.GetComponentInChildren<Text>().text = itrObj.Name;
         var lockSlider = DoorCtrPanel.GetComponentInChildren<Slider>();
-        var doorButton = DoorCtrPanel.GetComponentInChildren<Button>();
+        var openButton = DoorCtrPanel.GetComponentsInChildren<Button>()[0];
+        var closeButton = DoorCtrPanel.GetComponentsInChildren<Button>()[1];
 
         lockSlider.onValueChanged.RemoveAllListeners();
-        doorButton.onClick.RemoveAllListeners();
+        openButton.onClick.RemoveAllListeners();
+        closeButton.onClick.RemoveAllListeners();
 
-        doorButton.onClick.AddListener(itrObj.DoorOpenClose);
+        openButton.onClick.AddListener(itrObj.DoorOpen);
+        closeButton.onClick.AddListener(itrObj.DoorClose);
 
         lockSlider.value = (float)itrObj.lockPos;
         lockSlider.onValueChanged.AddListener((delegate(float arg0)

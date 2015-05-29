@@ -16,6 +16,8 @@ public class Hero : Character, IDamageSource
     [HideInInspector]
     public bool movementLocked;
 
+    public GameObject GrabPointGameObject;
+
 	private float characterSpeed;
 	private Transform myTransform;              // this transform
 	private Vector3 destinationPosition;        // The destination Point
