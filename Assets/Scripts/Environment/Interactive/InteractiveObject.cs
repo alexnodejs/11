@@ -15,9 +15,10 @@ public class InteractiveObject : MonoBehaviour, IInteractive
         OnFixedUpdate();
     }
 
-    public virtual void Interact()
+    public virtual GameObject Interact()
     {
         //Debug.Log(Name + ": " + Distance);
+        return null;
     }
 
     protected virtual void OnFixedUpdate()
