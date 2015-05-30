@@ -4,13 +4,12 @@ using Global;
 
 public class InteractiveObject : MonoBehaviour, IInteractive
 {
-    public GameObject canvasUI;
     public string Name;
 
     /// <summary>
     /// Private params:
     /// </summary>
-    private bool _isHeroAround = false;
+    protected bool IsHeroAround = false;
 
     protected GameObject CurHeroGameObject;
 
@@ -29,7 +28,7 @@ public class InteractiveObject : MonoBehaviour, IInteractive
         if (target.tag == Tags.heroes)
         {
             CurHeroGameObject = target.gameObject;
-            _isHeroAround = true;
+            IsHeroAround = true;
         }
     }
 
@@ -44,11 +43,19 @@ public class InteractiveObject : MonoBehaviour, IInteractive
     protected virtual void OnHeroExit()
     {
         CurHeroGameObject = null;
-        _isHeroAround = false;
+        IsHeroAround = false;
     }
 
     protected virtual void OnFixedUpdate()
     {
-        canvasUI.SetActive(_isHeroAround);
+        if (InputManager.UseUp())
+        {
+            OnUseButtonUp();
+        }
+    }
+
+    protected virtual void OnUseButtonUp()
+    {
+        
     }
 }

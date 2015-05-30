@@ -18,7 +18,7 @@ public class ItrDoor : InteractiveObject
 
     public void DoorOpenClose()
     {
-        if (lockPos != LockPosition.Lock)
+        if (lockPos != LockPosition.Lock && IsHeroAround)
             Anim.SetBool("Open", !Anim.GetBool("Open"));
     }
 
@@ -39,29 +39,10 @@ public class ItrDoor : InteractiveObject
             Anim.SetBool("Open", false);
     }
 
-    protected override void OnFixedUpdate()
+    protected override void OnUseButtonUp()
     {
-        base.OnFixedUpdate();
-        //CheckIsAnybodyAround();
-    }
+        base.OnUseButtonUp();
 
-    private void CheckIsAnybodyAround()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3f);
-
-
-
-        foreach (var hitCol in hitColliders)
-        {
-            if (hitCol.GetComponent<Hero>())
-            {
-                DoorOpen();
-            }
-
-            else
-            {
-                DoorClose();
-            }
-        }
+        DoorOpenClose();
     }
 }

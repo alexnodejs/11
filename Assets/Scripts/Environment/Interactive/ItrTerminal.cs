@@ -17,4 +17,14 @@ public class ItrTerminal : InteractiveObject
 
         EC.HideControlPanel();
     }
+
+    protected override void OnUseButtonUp()
+    {
+        base.OnUseButtonUp();
+
+        if (IsHeroAround)
+        {
+            EC.ShowControlPanel();
+        }
+    }
 }

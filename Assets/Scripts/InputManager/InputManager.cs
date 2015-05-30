@@ -17,6 +17,7 @@ public class InputManager {
 	private static string SHIFT = "Shift";
 	private static string CONTROL = "Control";
 	private static string FUNCTION = "Function";
+    private static string USE = "Use";
 	
 	/// <summary>
 	/// Verticals the axis.
@@ -138,6 +139,22 @@ public class InputManager {
 	{
 		return Input.GetButtonUp(FUNCTION);
 	}
+
+    /// <summary>
+    /// Use.
+    /// </summary>
+    public static bool Use()
+    {
+        return Input.GetButton(USE);
+    }
+
+    /// <summary>
+    /// UseUp.
+    /// </summary>
+    public static bool UseUp()
+    {
+        return Input.GetButtonUp(USE);
+    }
 
 	/// <summary>
 	/// Follow.
