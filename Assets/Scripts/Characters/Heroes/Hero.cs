@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
+using System.Linq;
 using Global;
 
 public class Hero : Character, IDamageSource
@@ -17,6 +19,7 @@ public class Hero : Character, IDamageSource
     public bool movementLocked;
 
     public GameObject GrabPointGameObject;
+    public float InteractiveRadius = 3f;
 
 	private float characterSpeed;
 	private Transform myTransform;              // this transform
@@ -25,6 +28,7 @@ public class Hero : Character, IDamageSource
     private Vector3 targetPoint;
 	private SpriteRenderer selectCircle;
 	private float kHeroRotationSpeed = 200f;
+
     protected float baseDamage = 40.0f;
 
 	protected override void Init()
@@ -188,5 +192,33 @@ public class Hero : Character, IDamageSource
         {
             Dead();
         }
+    }
+
+    public override void TryToInteract()
+    {
+        base.TryToInteract();
+
+        CheckInteractableObjectsAround();
+    }
+
+    private void CheckInteractableObjectsAround()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, InteractiveRadius);
+        List<InteractiveObject> itrObjects = new List<InteractiveObject>();
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            InteractiveObject itrObj = hitColliders[i].GetComponent<InteractiveObject>();
+            if (itrObj)
+            {
+                itrObj.Distance = Vector3.Distance(itrObj.transform.position, transform.position);
+                itrObjects.Add(itrObj);
+            }
+
+            i++;
+        }
+
+        var sortedItrObjects = itrObjects.OrderBy(go => go.Distance).ToList();
+        sortedItrObjects[0].Interact();
     }
 }

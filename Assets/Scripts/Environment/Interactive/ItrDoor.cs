@@ -54,16 +54,19 @@ public class ItrDoor : InteractiveObject
     {
         base.OnFixedUpdate();
 
-        if (GetIsDoorOpen() && LockPos == LockPosition.Auto)
+        if (LockPos == LockPosition.Auto)
         {
-            if (Time.time > _timeToClose)
+            if (GetIsDoorOpen())
             {
-                DoorClose();
+                if (Time.time > _timeToClose)
+                {
+                    DoorClose();
+                }
             }
-        }
 
-        if (GetIsDoorNotBlock() && !_isDoorDetectorProcessing)
-            CheckIsCharacterAround();
+            if (!_isDoorDetectorProcessing)
+                CheckIsCharacterAround();
+        }
     }
 
     private void CheckIsCharacterAround()
@@ -81,5 +84,13 @@ public class ItrDoor : InteractiveObject
             i++;
         }
         _isDoorDetectorProcessing = false;
+    }
+
+    public override void Interact()
+    {
+        base.Interact();
+
+        if (Distance <= InterfaceWorkDistance)
+            DoorOpenClose();
     }
 }
