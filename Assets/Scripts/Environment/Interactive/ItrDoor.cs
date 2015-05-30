@@ -11,14 +11,17 @@ public class ItrDoor : InteractiveObject
         Lock
     }
 
-    public LockPosition lockPos;
+    public float DoorDetectorRadius = 3f;
+    public LockPosition LockPos;
     public Animator Anim;
 
-    private bool _someBodyAround = false;
+    private float _autoCloseTime = 3f;
+    private float _timeToClose;
+    private bool _isDoorDetectorProcessing = false;
 
     public void DoorOpenClose()
     {
-        if (lockPos != LockPosition.Lock && IsHeroAround)
+        if (GetIsDoorNotBlock())
             Anim.SetBool("Open", !Anim.GetBool("Open"));
     }
 
@@ -27,22 +30,56 @@ public class ItrDoor : InteractiveObject
         return Anim.GetBool("Open");
     }
 
+    public bool GetIsDoorNotBlock()
+    {
+        return LockPos != LockPosition.Lock;
+    }
+
     public void DoorOpen()
     {
-        if (lockPos != LockPosition.Lock)
+        if (GetIsDoorNotBlock() && GetIsDoorOpen() != true)
+        {
             Anim.SetBool("Open", true);
+            _timeToClose = Time.time + _autoCloseTime;   
+        }
     }
 
     public void DoorClose()
     {
-        if (lockPos != LockPosition.Lock)
+        if (GetIsDoorNotBlock())
             Anim.SetBool("Open", false);
     }
 
-    protected override void OnUseButtonUp()
+    protected override void OnFixedUpdate()
     {
-        base.OnUseButtonUp();
+        base.OnFixedUpdate();
 
-        DoorOpenClose();
+        if (GetIsDoorOpen() && LockPos == LockPosition.Auto)
+        {
+            if (Time.time > _timeToClose)
+            {
+                DoorClose();
+            }
+        }
+
+        if (GetIsDoorNotBlock() && !_isDoorDetectorProcessing)
+            CheckIsCharacterAround();
+    }
+
+    private void CheckIsCharacterAround()
+    {
+        _isDoorDetectorProcessing = true;
+        Collider[] hitColliders = Physics.OverlapSphere(gameObject.transform.position, DoorDetectorRadius);
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+            if (hitColliders[i].GetComponent<Character>())
+            {
+                _timeToClose = Time.time + _autoCloseTime;
+                DoorOpen();
+            }
+            i++;
+        }
+        _isDoorDetectorProcessing = false;
     }
 }

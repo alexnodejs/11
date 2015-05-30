@@ -6,11 +6,6 @@ public class InteractiveObject : MonoBehaviour, IInteractive
 {
     public string Name;
 
-    /// <summary>
-    /// Private params:
-    /// </summary>
-    protected bool IsHeroAround = false;
-
     protected GameObject CurHeroGameObject;
 
     void FixedUpdate()
@@ -18,44 +13,13 @@ public class InteractiveObject : MonoBehaviour, IInteractive
         OnFixedUpdate();
     }
 
-    public void Interact()
+    public virtual void Interact()
     {
         
-    }
-
-    void OnTriggerStay(Collider target)
-    {
-        if (target.tag == Tags.heroes)
-        {
-            CurHeroGameObject = target.gameObject;
-            IsHeroAround = true;
-        }
-    }
-
-    void OnTriggerExit(Collider target)
-    {
-        if (target.tag == Tags.heroes)
-        {
-            OnHeroExit();
-        }
-    }
-
-    protected virtual void OnHeroExit()
-    {
-        CurHeroGameObject = null;
-        IsHeroAround = false;
     }
 
     protected virtual void OnFixedUpdate()
     {
-        if (InputManager.UseUp())
-        {
-            OnUseButtonUp();
-        }
-    }
 
-    protected virtual void OnUseButtonUp()
-    {
-        
     }
 }

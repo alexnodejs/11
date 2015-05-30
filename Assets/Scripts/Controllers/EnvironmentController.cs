@@ -75,10 +75,10 @@ public class EnvironmentController : MonoBehaviour
         openButton.onClick.AddListener(itrObj.DoorOpen);
         closeButton.onClick.AddListener(itrObj.DoorClose);
 
-        lockSlider.value = (float)itrObj.lockPos;
+        lockSlider.value = (float)itrObj.LockPos;
         lockSlider.onValueChanged.AddListener((delegate(float arg0)
         {
-            itrObj.lockPos = (ItrDoor.LockPosition)arg0;
+            itrObj.LockPos = (ItrDoor.LockPosition)arg0;
         }));
     }
 
