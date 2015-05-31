@@ -5,7 +5,6 @@ using System.Collections;
 public class EnvironmentController : MonoBehaviour
 {
     public GameObject ControlPanel;
-    public ItrDoor[] DoorsArray;
     
     public GameObject DoorCtrPanel;
     public GameObject EnergyCtrPanel;
@@ -14,13 +13,9 @@ public class EnvironmentController : MonoBehaviour
 
     public GameObject CtrPanButtonPrefab;
 
-    void Awake()
+    public void ShowControlPanel(ItrDoor[] itrDootArr)
     {
-        BuildDoorsListPanel();
-    }
-
-    public void ShowControlPanel()
-    {
+        BuildDoorsListPanel(itrDootArr);
         HideAll();
         ControlPanel.SetActive(true);
     }
@@ -43,16 +38,18 @@ public class EnvironmentController : MonoBehaviour
         EnergyListPanel.SetActive(true);
     }
 
-    private void BuildDoorsListPanel()
+    private void BuildDoorsListPanel(ItrDoor[] itrDootArr)
     {
-        for (int i = 0; i < DoorsArray.Length; i++)
+        Debug.Log(itrDootArr.Length);
+        for (int i = 0; i < itrDootArr.Length; i++)
         {
-            float newY = CtrPanButtonPrefab.transform.position.y - (50*i);
-            ItrDoor itrObj = DoorsArray[i];
-            GameObject button = Instantiate(CtrPanButtonPrefab, new Vector3(0f, newY, 0f), Quaternion.Euler(Vector3.zero)) as GameObject;
+            float newY = 100 - (50*i);
+            ItrDoor itrObj = itrDootArr[i];
+            GameObject button = Instantiate(CtrPanButtonPrefab, new Vector3(0f, 0f, 0f), Quaternion.Euler(Vector3.zero)) as GameObject;
             button.GetComponentInChildren<Text>().text = itrObj.Name;
             button.transform.SetParent(DoorsListPanel.transform);
             button.transform.localScale = new Vector3(1,1,1);
+            button.transform.localPosition = new Vector3(0f, newY, 0f);
 
             button.GetComponent<Button>().onClick.AddListener(() => PrepareDoorCtrPanel(itrObj));
         }

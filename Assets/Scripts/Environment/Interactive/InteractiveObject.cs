@@ -15,14 +15,31 @@ public class InteractiveObject : MonoBehaviour, IInteractive
         OnFixedUpdate();
     }
 
-    public virtual GameObject Interact()
+    public virtual void Interact()
     {
         //Debug.Log(Name + ": " + Distance);
+    }
+
+    public virtual GameObject Grab()
+    {
         return null;
     }
 
     protected virtual void OnFixedUpdate()
     {
 
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == Tags.heroes)
+        {
+            HeroExit();
+        }
+    }
+
+    protected virtual void HeroExit()
+    {
+        
     }
 }

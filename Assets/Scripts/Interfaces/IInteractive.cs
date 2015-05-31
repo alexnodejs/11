@@ -4,5 +4,7 @@ using Global;
 
 public interface IInteractive
 {
-    GameObject Interact();
+    void Interact();
+
+    GameObject Grab();
 }

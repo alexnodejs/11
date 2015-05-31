@@ -86,11 +86,11 @@ public class ItrDoor : InteractiveObject
         _isDoorDetectorProcessing = false;
     }
 
-    public override GameObject Interact()
+    public override void Interact()
     {
+        base.Interact();
+
         if (Distance <= InterfaceWorkDistance)
             DoorOpenClose();
-
-        return base.Interact();
     }
 }

@@ -28,6 +28,7 @@ public class Hero : Character, IDamageSource
     private Vector3 targetPoint;
 	private SpriteRenderer selectCircle;
 	private float kHeroRotationSpeed = 200f;
+    private GameObject _objInHands = null;
 
     protected float baseDamage = 40.0f;
 
@@ -198,7 +199,15 @@ public class Hero : Character, IDamageSource
     {
         base.TryToInteract();
 
-        CheckInteractableObjectsAround();
+        if (_objInHands)
+        {
+            DropObject(_objInHands);
+        }
+
+        else
+        {
+            CheckInteractableObjectsAround();
+        }
     }
 
     private void CheckInteractableObjectsAround()
@@ -220,5 +229,31 @@ public class Hero : Character, IDamageSource
 
         var sortedItrObjects = itrObjects.OrderBy(go => go.Distance).ToList();
         sortedItrObjects[0].Interact();
+
+        if (sortedItrObjects[0] is ItrBarrel)
+        {
+            GameObject barrel = sortedItrObjects[0].Grab();
+
+            if (barrel)
+            {
+                _objInHands = barrel;
+                GrabObject(_objInHands);
+            }
+        }
+    }
+
+    private void GrabObject(GameObject obj)
+    {
+        obj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        obj.transform.SetParent(GrabPointGameObject.transform);
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.rotation = Quaternion.Euler(Vector3.zero);
+    }
+
+    private void DropObject(GameObject obj)
+    {
+        obj.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        GrabPointGameObject.transform.DetachChildren();
+        _objInHands = null;
     }
 }
