@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f62b7025d7cc0442fbf846681e55cb7b
+guid: eba7ca3ff44ba4f1fa54ffe2bbfc702a
 labels:
 - shatter
 - toolkit
@@ -14,3 +14,6 @@ MonoImporter:
   defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
