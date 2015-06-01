@@ -20,33 +20,32 @@ public class EnemyAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// TODO: Decesion Manger
-		PatrolByPriority();
+		PatrolWaypintsByPriority();
 	}
 
 	#region Future Strategy
 
-	void PatrolRandomly () {
+	void PatrolWaypintsRandomly () {
 		if (ReachDestinition()) {
 			_currentWaypoint = _waypointController.getRandomWaypoint();
 			_agent.SetDestination(_currentWaypoint.transform.position);
 		}
 	}
 	
-	void PatrolLinearly () {
+	void PatrolWaypintsLinearly () {
 		if (ReachDestinition()) {
 			_currentWaypoint = _waypointController.getNextWaypoint(_currentWaypoint);
 			_agent.SetDestination(_currentWaypoint.transform.position);
 		}
 	}
 
-	void PatrolByPriority () {
+	void PatrolWaypintsByPriority () {
 		if (ReachDestinition()) {
 			if (_waypointQueue == null || _waypointQueue.Count == 0) {
 				_waypointQueue = _waypointController.getWaypointPriorityQueue();
 			}
 			
 			_currentWaypoint = _waypointQueue.Dequeue();
-			Debug.Log(_currentWaypoint.name);
 			_agent.SetDestination(_currentWaypoint.transform.position);
 		}
 	}
