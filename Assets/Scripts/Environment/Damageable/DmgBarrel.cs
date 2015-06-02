@@ -43,7 +43,6 @@ public class DmgBarrel : DamageableObjects
             Rigidbody rb = hit.GetComponent<Rigidbody>();
 
             if (rb == null) continue;
-            rb.AddExplosionForce(ExplosionPower, explosionPos, ExplosionRadius, 5.0f);
 
             float distance = Vector3.Distance(hit.transform.position, transform.position);
 
@@ -67,6 +66,8 @@ public class DmgBarrel : DamageableObjects
                     }
                 }
             }
+
+            rb.AddExplosionForce(ExplosionPower, explosionPos, ExplosionRadius, 1.0f);
         }
 
         Invoke("DestroyThis", 0.1f);

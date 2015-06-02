@@ -19,6 +19,7 @@ public class Character : MonoBehaviour, IDamageable
 	protected GameObject curWeapon;
 	protected Weapon GUN;
     protected WeaponFactory weaponFact;
+    protected bool IsGrabObject = false;
 
     public event EventHandler<CollisionEventArgs> CollisionEntered;
 
@@ -100,5 +101,10 @@ public class Character : MonoBehaviour, IDamageable
     public virtual void TakeDamage(DamageType damageType, float damage)
     {
         LifeLevel -= DamageHelper.CalculateDamage(damageType, damage, ObjMaterials.Meat);
+    }
+
+    public virtual void TryToInteract()
+    {
+        
     }
 }

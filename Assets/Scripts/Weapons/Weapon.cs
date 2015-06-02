@@ -5,7 +5,6 @@ using Global;
 
 public class Weapon : MonoBehaviour 
 {
-    public GameObject ShotPrefab;
 	public enum WeaponType {Revolver, Shotgun};
 	public GameObject shotOutPoint;
 	public float shotDamage = 10f;
@@ -21,7 +20,6 @@ public class Weapon : MonoBehaviour
 	RaycastHit shootHit;
 	int shootableMask;
 	ParticleSystem gunParticles;
-	LineRenderer gunLine;
 	AudioSource gunAudio;
 	Light gunLight;
 	float effectsDisplayTime = 0.05f;
@@ -37,7 +35,6 @@ public class Weapon : MonoBehaviour
 		
 		// Set up the references.
 		gunParticles = shotOutPoint.GetComponent<ParticleSystem> ();
-		gunLine = shotOutPoint.GetComponent <LineRenderer> ();
 		gunAudio = shotOutPoint.GetComponent<AudioSource> ();
 		gunLight = shotOutPoint.GetComponent<Light> ();
 
@@ -61,8 +58,6 @@ public class Weapon : MonoBehaviour
 	
 	protected void DisableEffects()
 	{
-		// Disable the line renderer and the light.
-		gunLine.enabled = false;
 		gunLight.enabled = false;
 	}
 
@@ -77,9 +72,6 @@ public class Weapon : MonoBehaviour
 		// Stop the particles from playing if they were, then start the particles.
 		gunParticles.Stop ();
 		gunParticles.Play ();
-		
-		// Enable the line renderer and set it's first position to be the end of the gun.
-		gunLine.enabled = true;
 	}
 
 	protected void Reloading()
@@ -109,28 +101,6 @@ public class Weapon : MonoBehaviour
 
 				// Enable gunLine, gunLight and Play gunAudio.
 				PlayEffects();
-
-				gunLine.SetPosition (0, shotOutPoint.transform.position);
-				
-				// Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
-				shootRay.origin = shotOutPoint.transform.position;
-				shootRay.direction = shotOutPoint.transform.forward;
-				
-				// Perform the raycast against gameobjects on the shootable layer and if it hits something...
-				if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
-				{
-					Hero hero = shootHit.collider.GetComponent <Hero> ();
-					gunLine.SetPosition (1, shootHit.point);
-                    hero.TakeDamage(DamageType.Kinetik, 35f);
-				}
-				else
-				{
-					gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
-
-                    _shotGunObj = (GameObject)Instantiate(ShotPrefab, shotOutPoint.transform.position, shotOutPoint.transform.rotation);
-                    _shotGunObj.transform.SetParent(shotOutPoint.transform);
-                    Invoke("DeleteShotGunObj", 1f);
-				}
                 
 			}
 			else if (reloadTimer >= timerBetweenReload)
@@ -139,9 +109,4 @@ public class Weapon : MonoBehaviour
 			}
 		}
 	}
-
-    private void DeleteShotGunObj()
-    {
-        Destroy(_shotGunObj);
-    }
 }
