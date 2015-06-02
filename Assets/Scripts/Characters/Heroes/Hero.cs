@@ -99,8 +99,6 @@ public class Hero : Character, IDamageSource
             navAgent.enabled = true;
             Vector3 targetPoint = hitInfo.point;
             destinationPosition = hitInfo.point;
-            Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
-            myTransform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 20f * Time.smoothDeltaTime);
         }
 	}
 
