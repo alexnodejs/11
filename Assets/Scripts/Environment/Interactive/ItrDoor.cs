@@ -91,6 +91,13 @@ public class ItrDoor : InteractiveObject
         base.Interact();
 
         if (Distance <= InterfaceWorkDistance)
+        {
+            if (LockPos == LockPosition.Auto)
+            {
+                LockPos = LockPosition.UnLock;
+            }
+
             DoorOpenClose();
+        }
     }
 }

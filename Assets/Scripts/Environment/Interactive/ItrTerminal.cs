@@ -17,7 +17,7 @@ public class ItrTerminal : InteractiveObject
     {
         base.Interact();
 
-        EC.ShowControlPanel(DoorsArray);
+        //EC.ShowControlPanel(DoorsArray);
     }
 
     protected override void HeroExit()
