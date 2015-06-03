@@ -19,6 +19,7 @@ public class InputManager {
 	private static string FUNCTION = "Function";
     private static string USE = "Use";
     private static string SPACE = "Space";
+    private static string TAB = "Tab";
 	
 	/// <summary>
 	/// Verticals the axis.
@@ -163,6 +164,22 @@ public class InputManager {
     public static bool Space()
     {
         return Input.GetButton(SPACE);
+    }
+
+    /// <summary>
+    /// Tab.
+    /// </summary>
+    public static bool Tab()
+    {
+        return Input.GetButton(TAB);
+    }
+
+    /// <summary>
+    /// TabUp.
+    /// </summary>
+    public static bool TabUp()
+    {
+        return Input.GetButtonUp(TAB);
     }
 
 	/// <summary>

@@ -4,101 +4,51 @@ using System.Collections.Generic;
 
 using Global;
 
-public class HeroesController : MonoBehaviour 
+public class HeroesController : MonoBehaviour
 {
-	/// <summary>
-	/// The heroes.
-	/// </summary>
-    private List<Hero> heroes = new List<Hero>();
+    public List<Hero> HeroesList;
+    public delegate void FreeMode();
+    public delegate void FollowMode(GameObject target);
+    public static event FollowMode onFollowMode;
+    public static event FreeMode onFreeMode;
 
-	/// <summary>
-	/// The selected heroes.
-	/// </summary>
-	private List<Hero> selectedHeroes = new List<Hero>();
-
-	/// <summary>
-	/// The selecteble mask.
-	/// </summary>
+    private int _curHeroID;
+    private Hero _curHero;
 	private int selectebleMask;
-
-	/// <summary>
-	/// The range.
-	/// </summary>
 	private float range = 100f;
-
-	/// <summary>
-	/// The shoot hit.
-	/// </summary>
 	private RaycastHit shootHit;
-
-	/// <summary>
-	/// The ray.
-	/// </summary>
 	private Ray ray;
-
-	/// <summary>
-	/// The user interface ctr.
-	/// </summary>
 	private UIController uiCtr;
-
-	/// <summary>
-	/// Delegate for on free event
-	/// </summary>
-	public delegate void FreeMode();
 	
-	/// <summary>
-	/// Delegate for on followed event
-	/// </summary>
-	public delegate void FollowMode(GameObject target);
-	
-	/// <summary>
-	/// Occurs when on follow mode.
-	/// </summary>
-	public static event FollowMode onFollowMode;
-	
-	/// <summary>
-	/// Occurs when on free mode.
-	/// </summary>
-	public static event FreeMode onFreeMode;
-	
-	/// <summary>
-	/// The is follow mode presented.
-	/// </summary>
 	private bool isFollowMode = false;
 
-	/// <summary>
-	/// Start this instance.
-	/// </summary>
 	void Start() 
 	{
-        foreach (GameObject hero in GameObject.FindGameObjectsWithTag(Tags.heroes))
-        {
-            //heroes.Add(hero.GetComponent<Hero>());
-            AddNewHero(hero.GetComponent<Hero>());
-        }
-
 		selectebleMask = LayerMask.GetMask(Layers.heroes);
 		uiCtr = GetComponent<UIController>();
+
+        SelectHeroWithIndex(0);
+	    
 	}
-	
-	/// <summary>
-	/// Update this instance.
-	/// </summary>
+
 	void Update () 
 	{
 		if (InputManager.Fire1() && !InputManager.Shift() && !isFollowMode)
 		{
 			SelectHero();
-			//SelectHeroBySelectionFrame();
 		}
 
+	    if (InputManager.TabUp())
+	    {
+	        NextHero();
+	    }
 
 		if (InputManager.Fire2())
 		{
 			GetDistinationPosition();
 		}
 
-		if (InputManager.Space() && selectedHeroes.Count > 0)
+		if (InputManager.Space())
 		{
 			SetHeroOrientation();
 			if (InputManager.Fire1())
@@ -106,14 +56,6 @@ public class HeroesController : MonoBehaviour
 				HeroMustShoot();
 			}
 		}
-        else
-        {
-            if (selectedHeroes.Count > 0)
-            {
-                Hero hero = selectedHeroes[0];
-                hero.readyToShoot = false;
-            }
-        }
 
 		if (InputManager.Follow())
 		{
@@ -122,19 +64,15 @@ public class HeroesController : MonoBehaviour
 
 	    if (InputManager.UseUp())
 	    {
-            Hero hero = selectedHeroes[0];
-            hero.TryToInteract();
+            _curHero.TryToInteract();
 	    }
 	}
 
-	/// <summary>
-	/// Sets up camera mode.
-	/// </summary>
 	void SetUpCameraMode()
 	{
-		if (onFollowMode != null && selectedHeroes.Count > 0 && !isFollowMode)
+		if (onFollowMode != null && !isFollowMode)
 		{
-			onFollowMode(selectedHeroes[0].gameObject);
+            onFollowMode(_curHero.gameObject);
 			isFollowMode = true;
 		}
 		else if (onFreeMode != null)
@@ -144,99 +82,66 @@ public class HeroesController : MonoBehaviour
 		}
 	}
 
-	/// <summary>
-	/// Check heroes and select those are under selection frame
-	/// </summary>
-    void SelectHeroBySelectionFrame()
+    private void SelectHeroWithIndex(int index)
     {
-        foreach (Hero hero in heroes)
-        {
-            Vector3 camPos = Camera.main.WorldToScreenPoint(hero.transform.position);
-            camPos.y = SelectionFrameCamera.InvertMouseY(camPos.y);
+        if (_curHero)
+            _curHero.UnselectHero();
 
-			if (SelectionFrameCamera.selection.Contains(camPos, true))
-            {
-                AddNewHero(hero);
-            }
+        _curHero = HeroesList[index];
+        _curHeroID = index;
+        _curHero.SelectHero();
+    }
+
+    private void NextHero()
+    {
+        int newHeroID = _curHeroID + 1;
+        if (newHeroID < HeroesList.Count)
+        {
+            SelectHeroWithIndex(newHeroID);
+        }
+        else
+        {
+            SelectHeroWithIndex(0);
         }
     }
 
-	/// <summary>
-	/// Selects the hero.
-	/// </summary>
 	void SelectHero()
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-		if (Physics.Raycast(ray, out shootHit, range, selectebleMask)) 
-        {
-			if (!InputManager.Shift())
-			{
-				ClearHeroesList();
-			}
-
-			AddNewHero(shootHit.collider.GetComponent<Hero>());
+		if (Physics.Raycast(ray, out shootHit, range, selectebleMask))
+		{
+		    Hero hero = shootHit.rigidbody.GetComponent<Hero>();
+		    if (hero)
+		    {
+		        for (int i = 0; i < HeroesList.Count; i++)
+		        {
+		            Hero heroFromList = HeroesList[i];
+		            if (heroFromList.Equals(hero))
+		            {
+		                SelectHeroWithIndex(i);
+		            }
+		        }
+		    }
 		}
 	}
 
-	/// <summary>
-	/// Gets the distination position.
-	/// </summary>
 	void GetDistinationPosition()
 	{
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-		if (selectedHeroes.Count > 0)
-		{
-			uiCtr.HighlightDestinationPoint(ray);
-		}
-		foreach (Hero hero in selectedHeroes)
-		{
-			hero.SetDistinationPosition(ray);
-		}
+		uiCtr.HighlightDestinationPoint(ray);
+        _curHero.SetDistinationPosition(ray);
 	}
 
     void SetHeroOrientation()
 	{
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		Hero hero = selectedHeroes[0];
-		hero.OrientateHero(ray);
-        hero.readyToShoot = true;
+        _curHero.OrientateHero(ray);
+        _curHero.readyToShoot = true;
 	}
 
 	void HeroMustShoot()
 	{
-		Hero hero = selectedHeroes[0];
-		hero.AttackCharacter();
+        _curHero.AttackCharacter();
 	}
-
-	#region Heroes Array monipulation methods:
-
-	/// <summary>
-	/// Adds the new hero.
-	/// </summary>
-	/// <param name="hero">Hero.</param>
-	void AddNewHero(Hero hero)
-	{
-		if (!selectedHeroes.Contains(hero))
-		{
-			hero.SelectHero();
-			selectedHeroes.Add(hero);
-		}
-	}
-
-	/// <summary>
-	/// Clears the heroes list.
-	/// </summary>
-	void ClearHeroesList()
-	{
-		foreach (Hero hero in selectedHeroes)
-		{
-			hero.UnselectHero();
-		}
-		selectedHeroes.Clear();
-	}
-
-	#endregion
-
 }
