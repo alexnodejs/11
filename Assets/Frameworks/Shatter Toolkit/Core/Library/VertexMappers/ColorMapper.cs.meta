@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0f5c3247905bb48cd9cca82a0a133a82
+labels:
+- shatter
+- toolkit
+- split
+- cut
+- triangulate
+- triangulator
+- cutter
+- splitter
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
