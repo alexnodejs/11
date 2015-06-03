@@ -73,7 +73,8 @@ public class HeroesController : MonoBehaviour
 	{
         foreach (GameObject hero in GameObject.FindGameObjectsWithTag(Tags.heroes))
         {
-            heroes.Add(hero.GetComponent<Hero>());
+            //heroes.Add(hero.GetComponent<Hero>());
+            AddNewHero(hero.GetComponent<Hero>());
         }
 
 		selectebleMask = LayerMask.GetMask(Layers.heroes);
@@ -88,13 +89,16 @@ public class HeroesController : MonoBehaviour
 		if (InputManager.Fire1() && !InputManager.Shift() && !isFollowMode)
 		{
 			SelectHero();
-			SelectHeroBySelectionFrame();
+			//SelectHeroBySelectionFrame();
 		}
+
+
 		if (InputManager.Fire2())
 		{
 			GetDistinationPosition();
 		}
-		if (InputManager.Shift() && selectedHeroes.Count > 0)
+
+		if (InputManager.Space() && selectedHeroes.Count > 0)
 		{
 			SetHeroOrientation();
 			if (InputManager.Fire1())
@@ -110,6 +114,7 @@ public class HeroesController : MonoBehaviour
                 hero.readyToShoot = false;
             }
         }
+
 		if (InputManager.Follow())
 		{
 			SetUpCameraMode();
@@ -163,17 +168,14 @@ public class HeroesController : MonoBehaviour
 	{
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-		if (Physics.Raycast(ray, out shootHit, range, selectebleMask)) {
+		if (Physics.Raycast(ray, out shootHit, range, selectebleMask)) 
+        {
 			if (!InputManager.Shift())
 			{
 				ClearHeroesList();
 			}
 
 			AddNewHero(shootHit.collider.GetComponent<Hero>());
-		} 
-		else 
-		{
-			ClearHeroesList();
 		}
 	}
 

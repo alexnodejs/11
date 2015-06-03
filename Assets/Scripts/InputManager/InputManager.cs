@@ -18,6 +18,7 @@ public class InputManager {
 	private static string CONTROL = "Control";
 	private static string FUNCTION = "Function";
     private static string USE = "Use";
+    private static string SPACE = "Space";
 	
 	/// <summary>
 	/// Verticals the axis.
@@ -154,6 +155,14 @@ public class InputManager {
     public static bool UseUp()
     {
         return Input.GetButtonUp(USE);
+    }
+
+    /// <summary>
+    /// Space.
+    /// </summary>
+    public static bool Space()
+    {
+        return Input.GetButton(SPACE);
     }
 
 	/// <summary>
