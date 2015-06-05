@@ -137,11 +137,10 @@ public class HeroesController : MonoBehaviour
 	{
 		ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         _curHero.OrientateHero(ray);
-        _curHero.readyToShoot = true;
 	}
 
 	void HeroMustShoot()
 	{
-        _curHero.AttackCharacter();
+        //_curHero.AttackCharacter();
 	}
 }

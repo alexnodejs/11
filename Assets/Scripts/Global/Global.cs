@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace Global
-{ 
+{
 	#region Constants
 
 	public static class Const

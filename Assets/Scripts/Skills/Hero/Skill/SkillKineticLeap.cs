@@ -100,7 +100,7 @@ public class SkillKineticLeap: SkillController, IHeroCollision
 
         if (skill.isValid)
         {
-            heroScript.movementLocked = true;
+            heroScript.MovementLocked = true;
             movementInProcess = true;
 
             SaveInitialTransform();
@@ -110,7 +110,7 @@ public class SkillKineticLeap: SkillController, IHeroCollision
 
         if (!skill.isActive)
         {
-            heroScript.movementLocked = false;
+            heroScript.MovementLocked = false;
         }
     }
 
@@ -139,12 +139,12 @@ public class SkillKineticLeap: SkillController, IHeroCollision
 
     void OnEnable()
     {
-        heroScript.CollisionEntered += OnHeroCollisionEnter;
+        //heroScript.CollisionEntered += OnHeroCollisionEnter;
     }
     
     void OnDisable()
     {
-        heroScript.CollisionEntered -= OnHeroCollisionEnter;
+        //heroScript.CollisionEntered -= OnHeroCollisionEnter;
     }
 
     #endregion
@@ -162,7 +162,7 @@ public class SkillKineticLeap: SkillController, IHeroCollision
             if (source is IDamageSource)
             {
                 IDamageSource sourceWithDamage = source as IDamageSource;
-                enemy.TakeDemage(DamageType.Kinetik, sourceWithDamage.AmountOfDamage());
+                //enemy.TakeDemage(DamageType.Kinetik, sourceWithDamage.AmountOfDamage());
             }
         }
     }
