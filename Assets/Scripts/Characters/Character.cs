@@ -32,6 +32,8 @@ public class Character : MonoBehaviour, IDamageable
         CharacterAnimator = GetComponent<Animator>();
         GM = GameObject.FindGameObjectWithTag(Tags.gameManager).GetComponent<GameManager>();
         EC = GM.getEnemyCtr();
+
+        Init();
     }
 
     void FixedUpdate()
@@ -39,10 +41,15 @@ public class Character : MonoBehaviour, IDamageable
         CharacterCurSpeed = NavAgent.velocity.magnitude;
         CharacterAnimator.SetFloat("Speed", CharacterCurSpeed);
 
-        CharacterUpdate();
+        CharacterFixedUpdate();
     }
 
-    protected virtual void CharacterUpdate()
+    protected virtual void Init()
+    {
+        
+    }
+
+    protected virtual void CharacterFixedUpdate()
     {
         
     }
@@ -128,6 +135,24 @@ public class Character : MonoBehaviour, IDamageable
         ObjInHands = null;
     }
 
+    protected void RotateCharacter(Vector3 targetPoint)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, CharacterRotationSpeed * Time.smoothDeltaTime);
+    }
+
+    protected void SetCharacterDestination(Vector3 point)
+    {
+        NavAgent.ResetPath();
+        NavAgent.SetDestination(point);
+    }
+
+    protected void StopNavAgent()
+    {
+        NavAgent.Stop();
+        NavAgent.ResetPath();
+    }
+
     /// <summary>
     /// Movement:
     /// </summary>
@@ -137,23 +162,20 @@ public class Character : MonoBehaviour, IDamageable
         RaycastHit hitInfo = new RaycastHit();
         if (Physics.Raycast(ray.origin, ray.direction, out hitInfo))
         {
-            NavAgent.ResetPath();
-            NavAgent.SetDestination(hitInfo.point);
+            SetCharacterDestination(hitInfo.point);
         }
     }
 
-    public void OrientateHero(Ray ray)
+    public virtual void OrientateHero(Ray ray)
     {
         Plane playerPlane = new Plane(Vector3.up, transform.position);
         float hitdist = 0.0f;
 
         if (playerPlane.Raycast(ray, out hitdist))
         {
-            NavAgent.Stop();
-            NavAgent.ResetPath();
+            StopNavAgent();
             Vector3 targetPoint = ray.GetPoint(hitdist);
-            Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, CharacterRotationSpeed * Time.smoothDeltaTime);
+            RotateCharacter(targetPoint);
         }
     }
 }

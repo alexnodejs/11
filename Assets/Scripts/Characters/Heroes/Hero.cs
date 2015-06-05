@@ -19,14 +19,13 @@ public class Hero : Character
         base.SetDistinationPosition(ray);
     }
 
-    protected override void CharacterUpdate()
+    protected override void CharacterFixedUpdate()
     {
-        base.CharacterUpdate();
+        base.CharacterFixedUpdate();
 
         if (MovementLocked)
         {
-            NavAgent.Stop();
-            NavAgent.ResetPath();
+            StopNavAgent();
         }
     }
 }
