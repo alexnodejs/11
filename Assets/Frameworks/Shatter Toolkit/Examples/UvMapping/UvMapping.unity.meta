@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c09ac0dc271a143e5812f09df38e52fb
+guid: c0a1e9c0676b045a6b343e862d6b2632
 labels:
 - shatter
 - toolkit
@@ -9,7 +9,3 @@ labels:
 - triangulator
 - cutter
 - splitter
-DefaultImporter:
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 

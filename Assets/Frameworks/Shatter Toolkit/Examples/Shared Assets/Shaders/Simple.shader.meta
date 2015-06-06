@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fa94ebffbbdcb4c1fa9eb39a7e8d03f8
+guid: 52e9a79c32919418ab0c507d01a1bd45
 labels:
 - shatter
 - toolkit
@@ -9,8 +9,3 @@ labels:
 - triangulator
 - cutter
 - splitter
-ShaderImporter:
-  defaultTextures: []
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 

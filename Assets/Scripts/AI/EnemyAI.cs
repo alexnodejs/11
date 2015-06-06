@@ -10,6 +10,8 @@ public class EnemyAI : MonoBehaviour {
 	private Queue<Waypoint> _waypointQueue;
 	private Waypoint _currentWaypoint;
 
+	private float _maxWalkDistance = 50f;
+
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +22,7 @@ public class EnemyAI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// TODO: Decesion Manger
-		PatrolWaypintsByPriority();
+		PatrolRandomly();
 	}
 
 	#region Future Strategy
@@ -47,6 +49,19 @@ public class EnemyAI : MonoBehaviour {
 			
 			_currentWaypoint = _waypointQueue.Dequeue();
 			_agent.SetDestination(_currentWaypoint.transform.position);
+		}
+	}
+
+	void PatrolRandomly() {
+		if (ReachDestinition()) {
+			Vector3 direction = Random.insideUnitSphere * _maxWalkDistance;
+			direction += transform.position;
+			
+			NavMeshHit hit;
+			NavMesh.SamplePosition(direction, out hit, Random.Range(0f, _maxWalkDistance), 1);
+			Vector3 destination = hit.position;
+			
+			_agent.SetDestination(destination);
 		}
 	}
 
