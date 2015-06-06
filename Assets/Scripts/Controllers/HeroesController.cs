@@ -114,6 +114,12 @@ public class HeroesController : MonoBehaviour
 		{
 			SetUpCameraMode();
 		}
+
+	    if (InputManager.UseUp())
+	    {
+            Hero hero = selectedHeroes[0];
+            hero.TryToInteract();
+	    }
 	}
 
 	/// <summary>

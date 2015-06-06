@@ -6,12 +6,24 @@ public class ItrTerminal : InteractiveObject
 {
     public ItrDoor[] DoorsArray;
 
-    public void UnlockDoors()
+    private EnvironmentController EC;
+
+    void Awake()
     {
-        foreach (var doorItr in DoorsArray)
-        {
-            doorItr.IsBlock = false;
-        }
+        EC = GameObject.FindObjectOfType<EnvironmentController>();
     }
 
+    public override void Interact()
+    {
+        base.Interact();
+
+        //EC.ShowControlPanel(DoorsArray);
+    }
+
+    protected override void HeroExit()
+    {
+        base.HeroExit();
+
+        EC.HideControlPanel();
+    }
 }

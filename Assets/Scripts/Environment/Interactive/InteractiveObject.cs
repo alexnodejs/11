@@ -4,36 +4,42 @@ using Global;
 
 public class InteractiveObject : MonoBehaviour, IInteractive
 {
-    public GameObject canvasUI;
+    public string Name;
+    public float InterfaceWorkDistance = 2.5f;
+    public float Distance;
 
-    /// <summary>
-    /// Private params:
-    /// </summary>
-    private bool _isHeroAround = false;
+    protected GameObject CurHeroGameObject;
 
     void FixedUpdate()
     {
-        canvasUI.SetActive(_isHeroAround);
+        OnFixedUpdate();
     }
 
-    public void Interact()
+    public virtual void Interact()
+    {
+        //Debug.Log(Name + ": " + Distance);
+    }
+
+    public virtual GameObject Grab()
+    {
+        return null;
+    }
+
+    protected virtual void OnFixedUpdate()
+    {
+
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == Tags.heroes)
+        {
+            HeroExit();
+        }
+    }
+
+    protected virtual void HeroExit()
     {
         
-    }
-
-    void OnTriggerStay(Collider target)
-    {
-        if (target.tag == Tags.heroes)
-        {
-            _isHeroAround = true;
-        }
-    }
-
-    void OnTriggerExit(Collider target)
-    {
-        if (target.tag == Tags.heroes)
-        {
-            _isHeroAround = false;
-        }
     }
 }
