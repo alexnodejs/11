@@ -126,6 +126,11 @@ public class InputManager {
 		return Input.GetButton(CONTROL);
 	}
 
+    public static bool ControlUp()
+    {
+        return Input.GetButtonUp(CONTROL);
+    }
+
 	/// <summary>
 	/// Function.
 	/// </summary>

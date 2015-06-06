@@ -66,6 +66,15 @@ public class HeroesController : MonoBehaviour
 	    {
             _curHero.TryToInteract();
 	    }
+
+	    if (InputManager.ControlUp())
+	    {
+	        if (_curHero is ScoutHero)
+	        {
+	            ScoutHero scout = _curHero as ScoutHero;
+                scout.DuckModeToggle();
+	        }
+	    }
 	}
 
 	void SetUpCameraMode()
