@@ -75,6 +75,15 @@ public class HeroesController : MonoBehaviour
                 scout.DuckModeToggle();
 	        }
 	    }
+
+	    if (InputManager.ShiftUp())
+	    {
+            if (_curHero is ScoutHero)
+            {
+                ScoutHero scout = _curHero as ScoutHero;
+                scout.ScoutRunToggle();
+            }
+	    }
 	}
 
 	void SetUpCameraMode()

@@ -118,6 +118,11 @@ public class InputManager {
 		return Input.GetButton(SHIFT);
 	}
 
+    public static bool ShiftUp()
+    {
+        return Input.GetButtonUp(SHIFT);
+    }
+
 	/// <summary>
 	/// Control.
 	/// </summary>

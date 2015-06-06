@@ -25,7 +25,7 @@ public class Hero : Character
 
         if (MovementLocked)
         {
-            StopNavAgent();
+            
         }
     }
 }
