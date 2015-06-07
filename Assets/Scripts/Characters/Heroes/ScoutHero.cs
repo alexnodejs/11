@@ -6,13 +6,6 @@ using ICode;
 [AddComponentMenu("Global/Characters/ScoutHero")]
 public class ScoutHero : Hero
 {
-    public enum MoveState
-    {
-        Walk,
-        Run,
-        Duck
-    }
-
     private float walkSpeed = 2f;
     private float runSpeed = 5f;
     private bool isRunMode = false;
@@ -51,5 +44,11 @@ public class ScoutHero : Hero
         {
             behavior.SetNode("Run");
         }
+    }
+
+    public void TargetingMode(bool isTargetingMode)
+    {
+        StopNavAgent();
+        CharacterAnimator.SetBool("Targeting", isTargetingMode);
     }
 }

@@ -4,8 +4,9 @@ using Global;
 
 public class Hero : Character
 {
-    [HideInInspector]
-    public bool MovementLocked = false;
+    public Weapon CurWeapon;
+    [HideInInspector] public float EnergyLevel;
+    [HideInInspector] public bool MovementLocked = false;
 
     public override void TakeDamage(DamageType damageType, float damage)
     {
@@ -27,5 +28,10 @@ public class Hero : Character
         {
             
         }
+    }
+
+    public void AttackCharacter()
+    {
+        CurWeapon.Shoot();
     }
 }

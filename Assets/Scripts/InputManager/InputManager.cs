@@ -176,6 +176,11 @@ public class InputManager {
         return Input.GetButton(SPACE);
     }
 
+    public static bool SpaceUp()
+    {
+        return Input.GetButtonUp(SPACE);
+    }
+
     /// <summary>
     /// Tab.
     /// </summary>

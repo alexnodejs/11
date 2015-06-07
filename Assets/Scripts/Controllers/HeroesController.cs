@@ -51,11 +51,27 @@ public class HeroesController : MonoBehaviour
 		if (InputManager.Space())
 		{
 			SetHeroOrientation();
+
+            if (_curHero is ScoutHero)
+            {
+                ScoutHero scout = _curHero as ScoutHero;
+                scout.TargetingMode(true);
+            }
+
 			if (InputManager.Fire1())
 			{
 				HeroMustShoot();
 			}
 		}
+
+        if (InputManager.SpaceUp())
+	    {
+            if (_curHero is ScoutHero)
+            {
+                ScoutHero scout = _curHero as ScoutHero;
+                scout.TargetingMode(false);
+            }
+	    }
 
 		if (InputManager.Follow())
 		{
@@ -159,6 +175,6 @@ public class HeroesController : MonoBehaviour
 
 	void HeroMustShoot()
 	{
-        //_curHero.AttackCharacter();
+        _curHero.AttackCharacter();
 	}
 }
