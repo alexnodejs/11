@@ -34,6 +34,7 @@ namespace ICode{
 		Animation,
 		Event,
 		Behaviour,
-		RectTransform
+		RectTransform,
+        Custom
 	}
 }
