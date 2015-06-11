@@ -37,8 +37,6 @@ public class WaypointController : MonoBehaviour {
 			return i2.Priority.CompareTo(i1.Priority);
 		});
 
-		Debug.Log("=====>");
-
 		return new Queue<Waypoint>(sortedWaypoints);
 	}
 }
