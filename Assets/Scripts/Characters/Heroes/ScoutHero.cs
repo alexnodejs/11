@@ -51,4 +51,14 @@ public class ScoutHero : Hero
         StopNavAgent();
         CharacterAnimator.SetBool("Targeting", isTargetingMode);
     }
+
+    public override void OrientateHero(Ray ray)
+    {
+        base.OrientateHero(ray);
+
+        HelperTrans.pointByRay(ray, vector3 =>
+        {
+            CurWeapon.transform.LookAt(vector3);
+        });
+    }
 }

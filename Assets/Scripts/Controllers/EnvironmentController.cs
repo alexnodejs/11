@@ -1,19 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using ICode;
 
 public class EnvironmentController : MonoBehaviour
 {
     public GameObject ControlPanel;
     public GameObject DoorCtrPanel;
+    public GameObject DoorsListPanel;
+
+    private List<ItrDoor> _allDoors;
+    private int[] _curDoorsId;
 
     void Awake()
     {
-        ItrDoor[] allDoors = GameObject.FindObjectsOfType<ItrDoor>();
+        _allDoors = GameObject.FindObjectsOfType<ItrDoor>().ToList();
     }
 
     public void ShowControlPanel(int[] itrDootArr)
     {
+        _curDoorsId = itrDootArr;
         HideAll();
         ControlPanel.SetActive(true);
     }
@@ -24,32 +32,53 @@ public class EnvironmentController : MonoBehaviour
         ControlPanel.SetActive(false);
     }
 
-    private void PrepareDoorCtrPanel(ItrDoor itrObj)
+    public void ShowDoorsListPanel()
     {
         HideAll();
-        DoorCtrPanel.SetActive(true);
-
-        DoorCtrPanel.GetComponentInChildren<Text>().text = itrObj.Name;
-        var lockSlider = DoorCtrPanel.GetComponentInChildren<Slider>();
-        var openButton = DoorCtrPanel.GetComponentsInChildren<Button>()[0];
-        var closeButton = DoorCtrPanel.GetComponentsInChildren<Button>()[1];
-
-        lockSlider.onValueChanged.RemoveAllListeners();
-        openButton.onClick.RemoveAllListeners();
-        closeButton.onClick.RemoveAllListeners();
-
-        openButton.onClick.AddListener(itrObj.DoorOpen);
-        closeButton.onClick.AddListener(itrObj.DoorClose);
-
-        lockSlider.value = (float)itrObj.LockPos;
-        lockSlider.onValueChanged.AddListener((delegate(float arg0)
+        DoorsListPanel.SetActive(true);
+        foreach (Button button in DoorsListPanel.GetComponentsInChildren<Button>())
         {
-            itrObj.LockPos = (ItrDoor.LockPosition)arg0;
-        }));
+            button.gameObject.SetActive(false);
+        }
+
+        foreach (int doorId in _curDoorsId)
+        {
+            DoorsListPanel.transform.GetChild(doorId).gameObject.SetActive(true);
+        }
+    }
+
+    public void PrepareDoorCtrPanel(int doorId)
+    {
+        foreach (ItrDoor door in _allDoors)
+        {
+            if (door.DoorId == doorId)
+            {
+                HideAll();
+                DoorCtrPanel.SetActive(true);
+
+                DoorCtrPanel.GetComponentInChildren<Text>().text = door.Name;
+                var lockSlider = DoorCtrPanel.GetComponentInChildren<Slider>();
+                var openButton = DoorCtrPanel.GetComponentsInChildren<Button>()[0];
+
+                lockSlider.onValueChanged.RemoveAllListeners();
+                openButton.onClick.RemoveAllListeners();
+
+                openButton.onClick.AddListener(door.DoorOpenClose);
+
+                lockSlider.value = (float)door.LockPos;
+                lockSlider.onValueChanged.AddListener((delegate(float arg0)
+                {
+                    door.LockPos = (ItrDoor.LockPosition)arg0;
+                }));
+
+                return;
+            }
+        }
     }
 
     private void HideAll()
     {
-
+        DoorCtrPanel.SetActive(false);
+        DoorsListPanel.SetActive(false);
     }
 }

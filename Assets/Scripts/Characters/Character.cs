@@ -139,6 +139,8 @@ public class Character : MonoBehaviour, IDamageable
     {
         Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, CharacterRotationSpeed * Time.smoothDeltaTime);
+
+        
     }
 
     protected void SetCharacterDestination(Vector3 point)
@@ -159,11 +161,7 @@ public class Character : MonoBehaviour, IDamageable
     
     public virtual void SetDistinationPosition(Ray ray)
     {
-        RaycastHit hitInfo = new RaycastHit();
-        if (Physics.Raycast(ray.origin, ray.direction, out hitInfo))
-        {
-            SetCharacterDestination(hitInfo.point);
-        }
+        SetCharacterDestination(HelperTrans.pointByRay(ray));
     }
 
     public virtual void OrientateHero(Ray ray)

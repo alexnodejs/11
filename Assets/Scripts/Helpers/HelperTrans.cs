@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 using Global;
 
@@ -16,5 +17,36 @@ public static class HelperTrans
     {
         float distance = Vector3.Distance(transformA.position, transformB.position);
         return distance;
+    }
+
+    /// <summary>
+    /// pointByRay;
+    /// </summary>
+    public static Vector3 pointByRay(Ray ray, Action<Vector3> callback)
+    {
+        Vector3 point = Vector3.zero;
+
+        RaycastHit hitInfo = new RaycastHit();
+        if (Physics.Raycast(ray.origin, ray.direction, out hitInfo))
+        {
+            point = hitInfo.point;
+        }
+
+        callback(point);
+
+        return point;
+    }
+
+    public static Vector3 pointByRay(Ray ray)
+    {
+        Vector3 point = Vector3.zero;
+
+        RaycastHit hitInfo = new RaycastHit();
+        if (Physics.Raycast(ray.origin, ray.direction, out hitInfo))
+        {
+            point = hitInfo.point;
+        }
+
+        return point;
     }
 }
