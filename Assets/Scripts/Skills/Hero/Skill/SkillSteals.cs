@@ -5,7 +5,7 @@ using Global;
 
 public class SkillSteals: SkillController
 {
-    private GameObject hero;
+    private ScoutHero hero;
     private Renderer heroRenderer;
     // TODO: RAIN is gone and we need to fix it in future
 	// private EntityRig aiEntity;
@@ -14,13 +14,13 @@ public class SkillSteals: SkillController
 
     void Start()
     {
-        hero = GameObject.FindGameObjectWithTag(Tags.hero);
+        hero = GameObject.FindObjectOfType<ScoutHero>();
 
-        //heroRenderer = hero.transform.FindChild("Body_01").GetComponent<Renderer>();
+        heroRenderer = hero.gameObject.transform.FindChild("Body_01").GetComponent<Renderer>();
         // aiEntity = hero.GetComponentInChildren<EntityRig>();
-       // inactiveSkillMaterial = heroRenderer.material;
+        inactiveSkillMaterial = heroRenderer.material;
 
-        //activeSkillMaterial = new Material(Shader.Find("Projector/Light"));
+        activeSkillMaterial = new Material(Shader.Find("Projector/Light"));
     }
 
     override public void Update()
@@ -47,7 +47,7 @@ public class SkillSteals: SkillController
     void MakeHeroVisibleForEnemies()
     {
         // aiEntity.Entity.IsActive = true;
-        //heroRenderer.material = inactiveSkillMaterial;
+        heroRenderer.material = inactiveSkillMaterial;
     }
 
     protected override void ValidateSkill()

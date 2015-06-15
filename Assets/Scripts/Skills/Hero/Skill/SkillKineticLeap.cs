@@ -27,7 +27,7 @@ public class SkillKineticLeap: SkillController, IHeroCollision
     /// <summary>
     // Hero game object
     /// </summary>
-    private GameObject hero;
+    private ScoutHero hero;
     
     /// <summary>
     // Hero rigidbody component
@@ -83,10 +83,10 @@ public class SkillKineticLeap: SkillController, IHeroCollision
 
     void Awake()
     {
-        hero = GameObject.FindGameObjectWithTag(Global.Tags.hero);
-        rBody = hero.GetComponent<Rigidbody>();
+        hero = GameObject.FindObjectOfType<ScoutHero>();
+        rBody = hero.gameObject.GetComponent<Rigidbody>();
         collider = hero.GetComponent<CapsuleCollider>();
-        heroScript = hero.GetComponent<Hero>();
+        heroScript = hero.gameObject.GetComponent<Hero>();
     }
 
     void Start()
