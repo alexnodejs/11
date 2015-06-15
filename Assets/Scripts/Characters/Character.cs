@@ -51,7 +51,7 @@ public class Character : MonoBehaviour, IDamageable
 
     protected virtual void CharacterFixedUpdate()
     {
-        
+        CheckPerimeterAround();
     }
 
     public virtual void TakeDamage(DamageType damageType, float damage)
@@ -77,6 +77,24 @@ public class Character : MonoBehaviour, IDamageable
     {
         NavAgent.Stop();
         NavAgent.ResetPath();
+    }
+
+    private void CheckPerimeterAround()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, InteractiveRadius);
+
+        int i = 0;
+        while (i < hitColliders.Length)
+        {
+
+
+            i++;
+        }
+    }
+
+    protected virtual void SomeColliderAround(Collider col)
+    {
+        
     }
 
     /// <summary>

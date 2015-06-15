@@ -35,7 +35,7 @@ public class Enemy : Character
 
 	void OnTriggerStay(Collider other)
 	{
-		if (other.gameObject.tag == Tags.heroes)
+		if (other.gameObject.tag == Tags.hero)
 		{
 			Vector3 direction = other.transform.position - transform.position;
 			float angle = Vector3.Angle(direction, transform.forward);
@@ -45,7 +45,7 @@ public class Enemy : Character
 				RaycastHit hit;
 				if (Physics.Raycast(transform.position + transform.up, direction.normalized, out hit, col.radius))
 				{
-					if (hit.collider.gameObject.tag == Tags.heroes)
+					if (hit.collider.gameObject.tag == Tags.hero)
 					{
                         curTargetedHero = other.gameObject.GetComponent<Hero>();
                         if (!curTargetedHero.isDead)
@@ -64,7 +64,7 @@ public class Enemy : Character
 
 	void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.tag == Tags.heroes)
+		if (other.gameObject.tag == Tags.hero)
 		{
 			Debug.Log("Out: " + other.gameObject.name);
 		}

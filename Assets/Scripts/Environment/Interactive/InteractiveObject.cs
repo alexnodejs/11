@@ -32,7 +32,7 @@ public class InteractiveObject : MonoBehaviour, IInteractive
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == Tags.heroes)
+        if (other.tag == Tags.hero)
         {
             HeroExit();
         }

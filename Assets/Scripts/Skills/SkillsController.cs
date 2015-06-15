@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Global;
 
 public class SkillsController
 {
@@ -9,7 +10,7 @@ public class SkillsController
 
     public SkillsController()
     {
-        characterController = GameObject.FindGameObjectWithTag(Global.Tags.heroes).GetComponent<Character>();
+        characterController = GameObject.FindGameObjectWithTag(Tags.hero).GetComponent<Hero>();
     }
 
     /// <summary>

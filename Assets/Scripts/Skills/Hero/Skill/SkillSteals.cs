@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 // using RAIN.Entities;
+using Global;
 
 public class SkillSteals: SkillController
 {
@@ -13,13 +14,13 @@ public class SkillSteals: SkillController
 
     void Start()
     {
-        hero = GameObject.FindGameObjectWithTag(Global.Tags.heroes);
+        hero = GameObject.FindGameObjectWithTag(Tags.hero);
 
-        heroRenderer = hero.transform.FindChild("Body_01").GetComponent<Renderer>();
+        //heroRenderer = hero.transform.FindChild("Body_01").GetComponent<Renderer>();
         // aiEntity = hero.GetComponentInChildren<EntityRig>();
-        inactiveSkillMaterial = heroRenderer.material;
+       // inactiveSkillMaterial = heroRenderer.material;
 
-        activeSkillMaterial = new Material(Shader.Find("Projector/Light"));
+        //activeSkillMaterial = new Material(Shader.Find("Projector/Light"));
     }
 
     override public void Update()
@@ -46,7 +47,7 @@ public class SkillSteals: SkillController
     void MakeHeroVisibleForEnemies()
     {
         // aiEntity.Entity.IsActive = true;
-        heroRenderer.material = inactiveSkillMaterial;
+        //heroRenderer.material = inactiveSkillMaterial;
     }
 
     protected override void ValidateSkill()

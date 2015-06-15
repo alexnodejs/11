@@ -21,10 +21,12 @@ namespace Global
 		public const string minCamera = "MainCamera";
 		public const string gameController = "GameController";
 		public const string gameManager = "GameManager";
-		public const string heroes = "Heroes";
+		public const string hero = "Hero";
 		public const string weapon = "Weapon";
         public const string actionBar = "ActionBar";
-    }
+	    public const string enemy = "Enemy";
+	    public const string neutral = "Neutral";
+	}
 
 	public static class Layers
 	{

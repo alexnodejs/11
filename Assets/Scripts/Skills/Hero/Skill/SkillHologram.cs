@@ -10,7 +10,7 @@ public class SkillHologram : SkillController
 
     void Start()
     {
-        hero = GameObject.FindGameObjectWithTag(Global.Tags.heroes).gameObject;
+        hero = GameObject.FindGameObjectWithTag(Global.Tags.hero).gameObject;
     }
 
     override public void Update()
