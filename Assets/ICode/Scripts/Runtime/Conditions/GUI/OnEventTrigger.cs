@@ -23,7 +23,7 @@ namespace ICode.Conditions.UnityGUI{
 			EventTrigger.Entry entry = new EventTrigger.Entry ();
 			entry.eventID = type;
 			entry.callback.AddListener (OnTrigger);
-			handler.delegates.Add (entry);
+			handler.triggers.Add (entry);
 			
 		}
 		

@@ -13,7 +13,7 @@ namespace ICode.Actions.UnityCamera{
 			#if UNITY_5_0
 				Cursor.visible = visible.Value;
 			#else
-				Screen.showCursor=!visible.Value;
+				Cursor.visible=!visible.Value;
 			#endif
 			Finish ();
 		}
