@@ -44,11 +44,6 @@ public class Character : MonoBehaviour, IDamageable
         CharacterFixedUpdate();
     }
 
-    void Update()
-    {
-        CheckPerimeterAround();
-    }
-
     protected virtual void Init()
     {
         
@@ -80,24 +75,6 @@ public class Character : MonoBehaviour, IDamageable
     {
         NavAgent.Stop();
         NavAgent.ResetPath();
-    }
-
-    private void CheckPerimeterAround()
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SenceRadius);
-
-        int i = 0;
-        while (i < hitColliders.Length)
-        {
-            SomeColliderAround(hitColliders[i]);
-
-            i++;
-        }
-    }
-
-    protected virtual void SomeColliderAround(Collider col)
-    {
-        
     }
 
     /// <summary>
