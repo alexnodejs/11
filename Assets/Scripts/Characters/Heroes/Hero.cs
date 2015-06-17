@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using Global;public class Hero : Character{    public Weapon CurWeapon;    [HideInInspector] public float EnergyLevel;    [HideInInspector] public bool MovementLocked = false;    public override void TakeDamage(DamageType damageType, float damage)    {        base.TakeDamage(damageType, damage);    }    public override void SetDistinationPosition(Ray ray)    {        if (MovementLocked) return;        base.SetDistinationPosition(ray);    }    protected override void CharacterFixedUpdate()    {        base.CharacterFixedUpdate();        if (MovementLocked)        {                    }    }    public void AttackCharacter()    {        if (CurWeapon)            CurWeapon.Shoot();    }
+using Global;public class Hero : Character{    public Weapon CurWeapon;    [HideInInspector] public bool MovementLocked = false;    public override void TakeDamage(DamageType damageType, float damage)    {        base.TakeDamage(damageType, damage);    }    public override void SetDistinationPosition(Ray ray)    {        if (MovementLocked) return;        base.SetDistinationPosition(ray);    }    protected override void CharacterFixedUpdate()    {        base.CharacterFixedUpdate();        if (MovementLocked)        {                    }    }    public void AttackCharacter()    {        if (CurWeapon)            CurWeapon.Shoot();    }
 
     private void GrabObject(GameObject obj)
     {

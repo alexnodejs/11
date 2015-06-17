@@ -7,23 +7,24 @@ using Global;
 
 public class Character : MonoBehaviour, IDamageable
 {
-    private string Name = "Character";
+    public string Name = "Character";
     public GameObject GrabPointGameObject;
 
-    [HideInInspector]
-    public float LifeLevel = 100;
-    [HideInInspector]
-    public float InteractiveRadius = 3f;
+    [HideInInspector] public float LifeLevel = 100f;
+    [HideInInspector] public float EnergyLevel = 100f;
+    [HideInInspector] public float InteractiveRadius = 3f;
+    [HideInInspector] public float SenceRadius = 12f;
 
     protected bool IsDead;
     protected NavMeshAgent NavAgent;
     protected Animator CharacterAnimator;
     protected GameManager GM;
-    protected EnemyController EC;
     protected GameObject ObjInHands;
     protected SpriteRenderer SelectCircle;
     protected float CharacterRotationSpeed = 500f;
     protected float CharacterCurSpeed;
+    protected float ViewAngle = 180f;
+    protected float ViewRadius = 10f;
 
     void Awake()
     {
@@ -31,7 +32,6 @@ public class Character : MonoBehaviour, IDamageable
         NavAgent = GetComponent<NavMeshAgent>();
         CharacterAnimator = GetComponent<Animator>();
         GM = GameObject.FindGameObjectWithTag(Tags.gameManager).GetComponent<GameManager>();
-        EC = GM.getEnemyCtr();
 
         Init();
     }
@@ -44,6 +44,11 @@ public class Character : MonoBehaviour, IDamageable
         CharacterFixedUpdate();
     }
 
+    void Update()
+    {
+        CheckPerimeterAround();
+    }
+
     protected virtual void Init()
     {
         
@@ -51,7 +56,7 @@ public class Character : MonoBehaviour, IDamageable
 
     protected virtual void CharacterFixedUpdate()
     {
-        CheckPerimeterAround();
+        
     }
 
     public virtual void TakeDamage(DamageType damageType, float damage)
@@ -63,8 +68,6 @@ public class Character : MonoBehaviour, IDamageable
     {
         Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, CharacterRotationSpeed * Time.smoothDeltaTime);
-
-        
     }
 
     protected void SetCharacterDestination(Vector3 point)
@@ -81,12 +84,12 @@ public class Character : MonoBehaviour, IDamageable
 
     private void CheckPerimeterAround()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, InteractiveRadius);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SenceRadius);
 
         int i = 0;
         while (i < hitColliders.Length)
         {
-
+            SomeColliderAround(hitColliders[i]);
 
             i++;
         }
