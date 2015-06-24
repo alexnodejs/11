@@ -116,7 +116,7 @@ public class HeroesController : MonoBehaviour
 		}
 	}
 
-    private void SelectHeroWithIndex(int index)
+    public void SelectHeroWithIndex(int index)
     {
         if (_curHero)
             _curHero.UnselectHero();
