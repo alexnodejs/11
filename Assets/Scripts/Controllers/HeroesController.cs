@@ -102,6 +102,11 @@ public class HeroesController : MonoBehaviour
 	    }
 	}
 
+    void FixedUpdate()
+    {
+        uiCtr.UpdateHeroesStatus(HeroesList);
+    }
+
 	void SetUpCameraMode()
 	{
 		if (onFollowMode != null && !isFollowMode)
