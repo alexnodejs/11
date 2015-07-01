@@ -47,6 +47,7 @@ public class Character : MonoBehaviour, IDamageable
     protected float CharacterCurSpeed;
     protected float ViewAngle = 180f;
     protected float ViewRadius = 10f;
+    protected ObjMaterials CharcterMaterial;
 
     void Awake()
     {
@@ -62,13 +63,22 @@ public class Character : MonoBehaviour, IDamageable
     {
         CharacterCurSpeed = NavAgent.velocity.magnitude;
         CharacterAnimator.SetFloat("Speed", CharacterCurSpeed);
+        CheckHealthLevel();
 
         CharacterFixedUpdate();
     }
 
+    protected virtual void CheckHealthLevel()
+    {
+        if (_healthLevel <= 0f)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     protected virtual void Init()
     {
-        
+        CharcterMaterial = ObjMaterials.Meat;
     }
 
     protected virtual void CharacterFixedUpdate()
@@ -78,7 +88,7 @@ public class Character : MonoBehaviour, IDamageable
 
     public virtual void TakeDamage(DamageType damageType, float damage)
     {
-        
+        _healthLevel -= DamageHelper.CalculateDamage(damageType, damage, CharcterMaterial);
     }
 
     protected void RotateCharacter(Vector3 targetPoint)
