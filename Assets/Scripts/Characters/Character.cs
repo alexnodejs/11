@@ -10,11 +10,33 @@ public class Character : MonoBehaviour, IDamageable
     public string Name = "Character";
     public GameObject GrabPointGameObject;
 
-    [HideInInspector] public float LifeLevel = 100f;
-    [HideInInspector] public float EnergyLevel = 100f;
     [HideInInspector] public float InteractiveRadius = 3f;
     [HideInInspector] public float SenceRadius = 12f;
 
+    /// <summary>
+    /// LifeLevel:
+    /// </summary>
+    protected float _healthLevel = 100f;
+
+    public float HealthLevel
+    {
+        get { return _healthLevel; }
+
+        protected set { _healthLevel = value; }
+    }
+
+    /// <summary>
+    /// EnergyLevel:
+    /// </summary>
+    protected float _energyLevel = 100f;
+
+    public float EnergyLevel
+    {
+        get { return _energyLevel; }
+
+        protected set { _energyLevel = value; }
+    }
+    
     protected bool IsDead;
     protected NavMeshAgent NavAgent;
     protected Animator CharacterAnimator;

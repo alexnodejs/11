@@ -7,7 +7,7 @@ namespace Global
 
 	public static class Const
 	{
-		public const string GAME_NAME = "Space Hunta";
+		public const string GAME_NAME = "Jupiter II";
 		public const string GAME_VERSION = "0.1";
 	}
 
