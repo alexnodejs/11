@@ -8,12 +8,14 @@ public class ItrDoor : InteractiveObject
     {
         Auto = 0,
         UnLock,
-        Lock
+        Lock,
+        Broken
     }
 
     public float DoorDetectorRadius = 3f;
     public LockPosition LockPos;
     public Animator Anim;
+    public int DoorId;
 
     private float _autoCloseTime = 3f;
     private float _timeToClose;
@@ -21,7 +23,7 @@ public class ItrDoor : InteractiveObject
 
     public void DoorOpenClose()
     {
-        if (GetIsDoorNotBlock())
+        if (GetIsDoorNotBlock() && GetIsDoorNotBroken())
             Anim.SetBool("Open", !Anim.GetBool("Open"));
     }
 
@@ -35,9 +37,14 @@ public class ItrDoor : InteractiveObject
         return LockPos != LockPosition.Lock;
     }
 
+    public bool GetIsDoorNotBroken()
+    {
+        return LockPos != LockPosition.Broken;
+    }
+
     public void DoorOpen()
     {
-        if (GetIsDoorNotBlock() && GetIsDoorOpen() != true)
+        if (GetIsDoorNotBlock() && GetIsDoorOpen() != true && GetIsDoorNotBroken())
         {
             Anim.SetBool("Open", true);
             _timeToClose = Time.time + _autoCloseTime;   

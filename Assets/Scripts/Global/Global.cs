@@ -2,12 +2,12 @@
 using System.Collections;
 
 namespace Global
-{ 
+{
 	#region Constants
 
 	public static class Const
 	{
-		public const string GAME_NAME = "Space Hunta";
+		public const string GAME_NAME = "Jupiter II";
 		public const string GAME_VERSION = "0.1";
 	}
 
@@ -21,10 +21,12 @@ namespace Global
 		public const string minCamera = "MainCamera";
 		public const string gameController = "GameController";
 		public const string gameManager = "GameManager";
-		public const string heroes = "Heroes";
+		public const string hero = "Hero";
 		public const string weapon = "Weapon";
         public const string actionBar = "ActionBar";
-    }
+	    public const string enemy = "Enemy";
+	    public const string neutral = "Neutral";
+	}
 
 	public static class Layers
 	{

@@ -4,7 +4,7 @@ using Global;
 
 public class ItrTerminal : InteractiveObject
 {
-    public ItrDoor[] DoorsArray;
+    public int[] DoorsArray;
 
     private EnvironmentController EC;
 
@@ -17,7 +17,7 @@ public class ItrTerminal : InteractiveObject
     {
         base.Interact();
 
-        //EC.ShowControlPanel(DoorsArray);
+        EC.ShowControlPanel(DoorsArray);
     }
 
     protected override void HeroExit()

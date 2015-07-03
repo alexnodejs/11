@@ -1,110 +1,133 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
-
+using System.Linq;
 using Global;
 
 public class Character : MonoBehaviour, IDamageable
 {
-	public GameObject weaponDeploy;	
-    public bool autoEquip = false;
-    public Weapon.WeaponType curWeaponType;
-    public bool isDead = false;
-    public float LifeLevel = 100f;
+    public string Name = "Character";
+    public GameObject GrabPointGameObject;
 
-	protected NavMeshAgent navAgent;
-	protected Animator anim;
-	protected GameManager GM;				// Game Manager Class
-	protected EnemyController EC;         // EnemyController Class
-	protected GameObject curWeapon;
-	protected Weapon GUN;
-    protected WeaponFactory weaponFact;
-    protected bool IsGrabObject = false;
+    [HideInInspector] public float InteractiveRadius = 3f;
+    [HideInInspector] public float SenceRadius = 12f;
 
-    public event EventHandler<CollisionEventArgs> CollisionEntered;
+    /// <summary>
+    /// LifeLevel:
+    /// </summary>
+    protected float _healthLevel = 100f;
 
-	protected virtual void Init()
-	{
-		navAgent = GetComponent<NavMeshAgent>();
-		anim = GetComponent<Animator>();
-		GM = GameObject.FindGameObjectWithTag(Tags.gameManager).GetComponent<GameManager>();
-        EC = GM.getEnemyCtr();
-        weaponFact = GM.getWeaponFact();
-        //
-        if (autoEquip)
+    public float HealthLevel
+    {
+        get { return _healthLevel; }
+
+        protected set { _healthLevel = value; }
+    }
+
+    /// <summary>
+    /// EnergyLevel:
+    /// </summary>
+    protected float _energyLevel = 100f;
+
+    public float EnergyLevel
+    {
+        get { return _energyLevel; }
+
+        protected set { _energyLevel = value; }
+    }
+    
+    protected bool IsDead;
+    protected NavMeshAgent NavAgent;
+    protected Animator CharacterAnimator;
+    protected GameManager GM;
+    protected GameObject ObjInHands;
+    protected SpriteRenderer SelectCircle;
+    protected float CharacterRotationSpeed = 500f;
+    protected float CharacterCurSpeed;
+    protected float ViewAngle = 180f;
+    protected float ViewRadius = 10f;
+    protected ObjMaterials CharcterMaterial;
+
+    void Awake()
+    {
+        SelectCircle = GetComponentInChildren<SpriteRenderer>();
+        NavAgent = GetComponent<NavMeshAgent>();
+        CharacterAnimator = GetComponent<Animator>();
+        GM = GameObject.FindGameObjectWithTag(Tags.gameManager).GetComponent<GameManager>();
+
+        Init();
+    }
+
+    void FixedUpdate()
+    {
+        CharacterCurSpeed = NavAgent.velocity.magnitude;
+        CharacterAnimator.SetFloat("Speed", CharacterCurSpeed);
+        CheckHealthLevel();
+
+        CharacterFixedUpdate();
+    }
+
+    protected virtual void CheckHealthLevel()
+    {
+        if (_healthLevel <= 0f)
         {
-            EquipWeapon(curWeaponType);
-        }
-	}
-
-    protected virtual void OnCollisionEnter(Collision collision)
-    {
-        if (CollisionEntered != null)
-        {
-            CollisionEntered(this, new CollisionEventArgs () {Collision = collision});
+            Destroy(gameObject);
         }
     }
 
-    public void TakeDemage(DamageType damageType, float damage)
+    protected virtual void Init()
     {
-        LifeLevel -= DamageHelper.CalculateDamage(damageType, damage, ObjMaterials.Meat);
+        CharcterMaterial = ObjMaterials.Meat;
     }
 
-	public void AttackCharacter(GameObject hero)
-	{
-		ShootFromCurGun();
-	}
-
-	public void AttackCharacter()
-	{
-		ShootFromCurGun();
-	}
-
-	protected void ShootFromCurGun()
-	{
-		if (!GUN)
-			return;
-		
-		GUN.Shoot();
-	}
-
-    protected virtual void MeleeAttack()
+    protected virtual void CharacterFixedUpdate()
     {
-
-    }
-
-	public void EquipWeapon(Weapon.WeaponType wType)
-	{
-		if (curWeapon && curWeaponType == wType)
-		{
-			return;
-		}
-
-		curWeaponType = wType;
         
-        if (curWeapon)
-        {
-            Destroy(curWeapon);
-        }
-
-		curWeapon = null;
-		GUN = null;
-
-		if (curWeaponType != null)
-		{
-            curWeapon = weaponFact.getWeapon(curWeaponType, weaponDeploy.transform);
-            curWeapon.transform.parent = weaponDeploy.transform;
-			GUN = curWeapon.GetComponent<Weapon>();
-		}
-	}
+    }
 
     public virtual void TakeDamage(DamageType damageType, float damage)
     {
-        LifeLevel -= DamageHelper.CalculateDamage(damageType, damage, ObjMaterials.Meat);
+        _healthLevel -= DamageHelper.CalculateDamage(damageType, damage, CharcterMaterial);
     }
 
-    public virtual void TryToInteract()
+    protected void RotateCharacter(Vector3 targetPoint)
     {
-        
+        Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, CharacterRotationSpeed * Time.smoothDeltaTime);
+    }
+
+    protected void SetCharacterDestination(Vector3 point)
+    {
+        NavAgent.ResetPath();
+        NavAgent.SetDestination(point);
+    }
+
+    protected void StopNavAgent()
+    {
+        NavAgent.Stop();
+        NavAgent.ResetPath();
+    }
+
+    /// <summary>
+    /// Movement:
+    /// </summary>
+    
+    public virtual void SetDistinationPosition(Ray ray)
+    {
+        SetCharacterDestination(HelperTrans.pointByRay(ray));
+    }
+
+    public virtual void OrientateHero(Ray ray)
+    {
+        Plane playerPlane = new Plane(Vector3.up, transform.position);
+        float hitdist = 0.0f;
+
+        if (playerPlane.Raycast(ray, out hitdist))
+        {
+            StopNavAgent();
+            Vector3 targetPoint = ray.GetPoint(hitdist);
+            RotateCharacter(targetPoint);
+        }
     }
 }

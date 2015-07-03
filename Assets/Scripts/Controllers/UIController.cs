@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
+using System.Reflection.Emit;
 using Global;
+using ICode;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour {
 
 	public GameObject Pointer;
+    public GameObject HeroesPanel;
+    public Text ScoutHealthLevelText;
+    public Text WarBotHealthLevelText;
+    public Text TechBotHealthLevelText;
+
 	private SpriteRenderer _pointCircle;
 	
 	void Start () 
@@ -30,6 +38,27 @@ public class UIController : MonoBehaviour {
 			Invoke("HidePointer", 0.5f);
 		}
 	}
+
+    public void UpdateHeroesStatus(List<Hero> heroesList)
+    {
+        foreach (var hero in heroesList)
+        {
+            if (hero.GetComponent<ScoutHero>())
+            {
+                ScoutHealthLevelText.text = hero.HealthLevel.ToString();
+            }
+
+            if (hero.GetComponent<WarBotHero>())
+            {
+                WarBotHealthLevelText.text = hero.HealthLevel.ToString();
+            }
+
+            if (hero.GetComponent<TechBotHero>())
+            {
+                TechBotHealthLevelText.text = hero.HealthLevel.ToString();
+            }
+        }
+    }
 
 	void HidePointer()
 	{

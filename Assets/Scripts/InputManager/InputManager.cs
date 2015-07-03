@@ -18,6 +18,8 @@ public class InputManager {
 	private static string CONTROL = "Control";
 	private static string FUNCTION = "Function";
     private static string USE = "Use";
+    private static string SPACE = "Space";
+    private static string TAB = "Tab";
 	
 	/// <summary>
 	/// Verticals the axis.
@@ -116,6 +118,11 @@ public class InputManager {
 		return Input.GetButton(SHIFT);
 	}
 
+    public static bool ShiftUp()
+    {
+        return Input.GetButtonUp(SHIFT);
+    }
+
 	/// <summary>
 	/// Control.
 	/// </summary>
@@ -123,6 +130,11 @@ public class InputManager {
 	{
 		return Input.GetButton(CONTROL);
 	}
+
+    public static bool ControlUp()
+    {
+        return Input.GetButtonUp(CONTROL);
+    }
 
 	/// <summary>
 	/// Function.
@@ -154,6 +166,35 @@ public class InputManager {
     public static bool UseUp()
     {
         return Input.GetButtonUp(USE);
+    }
+
+    /// <summary>
+    /// Space.
+    /// </summary>
+    public static bool Space()
+    {
+        return Input.GetButton(SPACE);
+    }
+
+    public static bool SpaceUp()
+    {
+        return Input.GetButtonUp(SPACE);
+    }
+
+    /// <summary>
+    /// Tab.
+    /// </summary>
+    public static bool Tab()
+    {
+        return Input.GetButton(TAB);
+    }
+
+    /// <summary>
+    /// TabUp.
+    /// </summary>
+    public static bool TabUp()
+    {
+        return Input.GetButtonUp(TAB);
     }
 
 	/// <summary>

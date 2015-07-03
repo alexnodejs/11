@@ -4,7 +4,7 @@ using Global;
 
 public class F3DShotgun : MonoBehaviour 
 {
-    #if UNITY_5_0   
+    #if UNITY_5  
     private ParticleCollisionEvent[] collisionEvents = new ParticleCollisionEvent[16];
     private ParticleSystem ps;
 
@@ -47,30 +47,30 @@ public class F3DShotgun : MonoBehaviour
     }    
     #else
     // Particle collision events
-    private ParticleSystem.CollisionEvent[] collisionEvents = new ParticleSystem.CollisionEvent[16];
+    private ParticleCollisionEvent[] collisionEvents = new ParticleCollisionEvent[16];
 
     // On particle collision
     void OnParticleCollision(GameObject other)
     {
-        int safeLength = particleSystem.safeCollisionEventSize;
+        int safeLength = GetComponent<ParticleSystem>().GetSafeCollisionEventSize();
 
         if (collisionEvents.Length < safeLength)
-            collisionEvents = new ParticleSystem.CollisionEvent[safeLength];
+            collisionEvents = new ParticleCollisionEvent[safeLength];
 
-        int numCollisionEvents = particleSystem.GetCollisionEvents(other, collisionEvents);
+        int numCollisionEvents = GetComponent<ParticleSystem>().GetCollisionEvents(other, collisionEvents);
         
         // Play collision sound and apply force to the rigidbody was hit
         int i = 0;
         while (i < numCollisionEvents)
         {
-            F3DAudioController.instance.ShotGunHit(collisionEvents[i].intersection);
+            //F3DAudioController.instance.ShotGunHit(collisionEvents[i].intersection);
 
-            if (other.rigidbody)
+            if (other.GetComponent<Rigidbody>())
             {
                 Vector3 pos = collisionEvents[i].intersection;
                 Vector3 force = collisionEvents[i].velocity.normalized * 50f;
 
-                other.rigidbody.AddForceAtPosition(force, pos);
+                other.GetComponent<Rigidbody>().AddForceAtPosition(force, pos);
             }
 
             i++;

@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     private UIController uiCtr;
     private EnemyController enemyCtr;
     private WeaponFactory weaponFact;
+    private NeutralsController neutralsCtr;
 
-    public HeroesController getHeroesCtr()
+    public HeroesController GetHeroesCtr()
     {
         if (!heroesCtr)
             heroesCtr = GetComponent<HeroesController>();
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
         return heroesCtr;
     }
 
-    public EnemyController getEnemyCtr()
+    public EnemyController GetEnemyCtr()
     {
         if (!enemyCtr)
             enemyCtr = GetComponent<EnemyController>();
@@ -27,7 +28,7 @@ public class GameManager : MonoBehaviour
         return enemyCtr;
     }
 
-    public CameraController getCameraCtr()
+    public CameraController GetCameraCtr()
     {
         if (!cameraCtr)
             cameraCtr = GetComponent<CameraController>();
@@ -35,7 +36,7 @@ public class GameManager : MonoBehaviour
         return cameraCtr;
     }
 
-    public UIController getUICtr()
+    public UIController GetUICtr()
     {
         if (!uiCtr)
             uiCtr = GetComponent<UIController>();
@@ -43,11 +44,19 @@ public class GameManager : MonoBehaviour
         return uiCtr;
     }
 
-    public WeaponFactory getWeaponFact()
+    public WeaponFactory GetWeaponFact()
     {
         if (!weaponFact)
             weaponFact = GetComponent<WeaponFactory>();
 
         return weaponFact;
+    }
+
+    public NeutralsController GetNeutralsCtr()
+    {
+        if (!neutralsCtr)
+            neutralsCtr = GetComponent<NeutralsController>();
+
+        return neutralsCtr;
     }
 }

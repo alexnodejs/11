@@ -1,0 +1,12 @@
+# Blender MTL File: 'alexia.blend'
+# Material Count: 1
+
+newmtl Material__401.001
+Ns 7.843137
+Ka 0.000000 0.000000 0.000000
+Kd 0.470400 0.470400 0.470400
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd TX_Item_ForlanGun_D.tga

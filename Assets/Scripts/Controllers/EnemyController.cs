@@ -12,14 +12,8 @@ public class EnemyController : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+    {
 	
-	}
-
-	public void ISeeHero(Enemy enemy, GameObject hero)
-	{
-		enemy.MoveCharacter(hero.transform.position);
-		enemy.RotateCharacter(hero.transform.position);
-		enemy.AttackCharacter(hero);
 	}
 }
