@@ -3,7 +3,7 @@ using System.Collections;
 using Global;
 
 [AddComponentMenu("Global/Characters/WarBotHero")]
-public class WarBotHero : Hero
+public class WarBotHero : Hero, IRepairable
 {
     private Vector3 _targetPoint;
     private float _angleToDestination;
@@ -58,5 +58,10 @@ public class WarBotHero : Hero
     public override void OrientateHero(Ray ray)
     {
         //base.OrientateHero(ray);
+    }
+
+    public void Repair()
+    {
+
     }
 }

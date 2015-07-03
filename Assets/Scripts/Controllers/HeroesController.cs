@@ -33,7 +33,7 @@ public class HeroesController : MonoBehaviour
 
 	void Update () 
 	{
-		if (InputManager.Fire1() && !InputManager.Shift() && !isFollowMode)
+		if (InputManager.Fire1() && !InputManager.Shift())
 		{
 			SelectHero();
 		}
