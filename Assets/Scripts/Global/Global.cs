@@ -25,7 +25,8 @@ namespace Global
 		public const string weapon = "Weapon";
         public const string actionBar = "ActionBar";
 	    public const string enemy = "Enemy";
-	    public const string neutral = "Neutral";
+		public const string neutral = "Neutral";
+	    public const string heroes = "Heroes";
 	}
 
 	public static class Layers
