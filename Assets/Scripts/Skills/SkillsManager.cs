@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class SkillsManager : MonoBehaviour
 {
 
+    public GameObject EnergySkills;
+
     public List<GameObject> SkillsList = new List<GameObject>();
     /// <summary>
     /// Event handler.
@@ -20,7 +22,7 @@ public class SkillsManager : MonoBehaviour
     public void Start()
     {
         skillsController = new SkillsController();
-        actionBar = GameObject.FindGameObjectWithTag(Global.Tags.actionBar).GetComponent<ActionBar>();
+        actionBar = EnergySkills.GetComponent<ActionBar>();
         skillsController.SkillAdded += actionBar.OnSkillAdded;
 
         LoadSkills();
