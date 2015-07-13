@@ -9,7 +9,7 @@ public class SkillSlotController: MonoBehaviour, IPointerEnterHandler, IPointerD
 	/// Delegate the subscribers must implement for event when active slot updates.
 	/// </summary>
 	public delegate void SkillSlotDelegate(GameObject currentSlot);
-	
+
 	/// <summary>
 	/// An instance of the delegate with selected slot.
 	/// </summary>
@@ -95,7 +95,7 @@ public class SkillSlotController: MonoBehaviour, IPointerEnterHandler, IPointerD
 			skillSlot.ImageColor(deselectedSlotColor);
 		}
 	}
-	
+
 	/// <summary>
 	/// Disabled
 	/// </summary>

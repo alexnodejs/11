@@ -9,6 +9,7 @@ public class ActionBar: MonoBehaviour
 	/// <summary>
 	/// Skills slots storage.
 	/// </summary>
+	[HideInInspector]
 	public List<GameObject> SkillSlots = new List<GameObject>();
 
 	/// <summary>
@@ -27,7 +28,7 @@ public class ActionBar: MonoBehaviour
     }
 
 	public void Start()
-	{ 
+	{
 		AddEmptySlots();
 		SkillSlotController.SlotUpdated += DeselectSlot;
 	}
@@ -41,7 +42,7 @@ public class ActionBar: MonoBehaviour
 		{
 			SkillSlotController controller = slot.GetComponent<SkillSlotController>();
 
-            if(!controller.HasSkill())
+			if (!controller.HasSkill())
 			{
 				controller.SetSkill(skill);
 				break;
