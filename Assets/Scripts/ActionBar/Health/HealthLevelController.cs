@@ -17,7 +17,7 @@ public class HealthLevelController : MonoBehaviour {
 
 	void Update () {
 
-		int spriteIndex = (int)Math.Floor(50.00 / 10);
+		int spriteIndex = (int)Math.Floor(currentHero.HealthLevel / 10);
 		this.gameObject.GetComponent<Image>().sprite = levelSptites[spriteIndex];
 
 		textLabel.GetComponent<Text>().text = currentHero.HealthLevel.ToString() + "%";
