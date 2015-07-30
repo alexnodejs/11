@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SkillSlotController: MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 {
@@ -15,7 +16,7 @@ public class SkillSlotController: MonoBehaviour, IPointerEnterHandler, IPointerD
 	/// </summary>
 	public static event SkillSlotDelegate SlotUpdated;
 
-	public Color selectedSlotColor = new Color32 (50, 220, 150, 255);
+	public Color selectedSlotImage = new Color32 (50, 220, 150, 255);
 	public Color deselectedSlotColor = Color.white;
 	public Color suspendSlotColor = new Color32 (170, 170, 170, 255);
 
@@ -114,7 +115,7 @@ public class SkillSlotController: MonoBehaviour, IPointerEnterHandler, IPointerD
 	{
 		if (HasSkill())
 		{
-			skillSlot.ImageColor(selectedSlotColor);
+			skillSlot.ImageColor(selectedSlotImage);
 		}
 	}
 
@@ -165,7 +166,7 @@ public class SkillSlotController: MonoBehaviour, IPointerEnterHandler, IPointerD
 	/// </summary>
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		Focus();
+		//  Focus();
 
 		if (SlotUpdated != null)
 		{

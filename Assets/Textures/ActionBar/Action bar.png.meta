@@ -1,0 +1,341 @@
+fileFormatVersion: 2
+guid: e40c3feb8eaf04856aea914776800355
+timeCreated: 1438014269
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Action bar_0
+    21300002: Action bar_1
+    21300004: Action bar_2
+    21300006: Action bar_3
+    21300008: Action bar_4
+    21300010: Action bar_5
+    21300012: Action bar_6
+    21300014: Action bar_7
+    21300016: Action bar_8
+    21300018: Action bar_9
+    21300020: Action bar_10
+    21300022: Action bar_11
+    21300024: Action bar_12
+    21300026: Action bar_13
+    21300028: Action bar_14
+    21300030: Action bar_15
+    21300032: Action bar_16
+    21300034: Action bar_17
+    21300036: Action bar_18
+    21300038: Action bar_19
+    21300040: Action bar_20
+    21300042: Action bar_21
+    21300044: Action bar_22
+    21300046: Action bar_23
+    21300048: Action bar_24
+    21300050: Action bar_25
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 2
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Action bar_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1092
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_1
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 1092
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_2
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 1092
+        width: 287
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_3
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 1092
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_4
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 1092
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 795
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_6
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 795
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_7
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 795
+        width: 287
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_8
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 795
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_9
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 795
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_10
+      rect:
+        serializedVersion: 2
+        x: 1521
+        y: 795
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 488
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_12
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 488
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_13
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 488
+        width: 287
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_14
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 488
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_15
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 488
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 195
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_17
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 195
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_18
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 195
+        width: 287
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_19
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 195
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_20
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 195
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_21
+      rect:
+        serializedVersion: 2
+        x: 1521
+        y: 195
+        width: 286
+        height: 286
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_22
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_23
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 0
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_24
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 0
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Action bar_25
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 0
+        width: 136
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
